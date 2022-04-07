@@ -1,9 +1,3 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// ignore_for_file: public_member_api_docs
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
@@ -15,15 +9,15 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PaiementWeb extends StatefulWidget {
-  const PaiementWeb({Key? key, required this.url}) : super(key: key);
-
+class FlottePage extends StatefulWidget {
   final String url;
+
+  const FlottePage({Key? key, required this.url}) : super(key: key);
   @override
-  _PaiementWebState createState() => _PaiementWebState();
+  State<FlottePage> createState() => _FlottePageState();
 }
 
-class _PaiementWebState extends State<PaiementWeb> {
+class _FlottePageState extends State<FlottePage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   String _url = "www.google.ci";
@@ -36,66 +30,50 @@ class _PaiementWebState extends State<PaiementWeb> {
     }
   }
 
-  Widget _buildShowUrlBtn() {
-    return FutureBuilder<WebViewController>(
-      future: _controller.future,
-      builder:
-          (BuildContext context, AsyncSnapshot<WebViewController> controller) {
-        if (controller.hasData) {
-          return const SizedBox();
-        }
-        return Container();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("RECHARGEMENT"),
-        leading: InkWell(
-          child: Icon(CupertinoIcons.back),
-          onTap: () async => await showPlatformDialog(
-              context: context,
-              builder: (context) {
-                return popscopeDialogg();
-              }),
-        ),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Builder(builder: (BuildContext context) {
-                return WebView(
-                  initialUrl: _url,
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onWebViewCreated: (WebViewController webViewController) {
-                    _controller.complete(webViewController);
-                  },
-                  onProgress: (int progress) async {
-                    print('WebView is loading (progress : $progress%)');
-                  },
-                  javascriptChannels: <JavascriptChannel>{
-                    _toasterJavascriptChannel(context),
-                  },
-                  navigationDelegate: (NavigationRequest request) {
-                    return NavigationDecision.navigate;
-                  },
-                  onPageStarted: (String url) {
-                    print('Page started loading: $url');
-                  },
-                  onPageFinished: (String url) {
-                    print('Page finished loading: $url');
-                  },
-                  gestureNavigationEnabled: true,
-                  backgroundColor: Colors.white,
-                );
-              }),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: (() async => await showPlatformDialog(
+          context: context,
+          builder: (context) {
+            return popscopeDialogg();
+          })),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(title: Text("Ma flotte")),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: Builder(builder: (BuildContext context) {
+                  return WebView(
+                    initialUrl: _url,
+                    javascriptMode: JavascriptMode.unrestricted,
+                    onWebViewCreated: (WebViewController webViewController) {
+                      _controller.complete(webViewController);
+                    },
+                    onProgress: (int progress) async {
+                      print('WebView is loading (progress : $progress%)');
+                    },
+                    javascriptChannels: <JavascriptChannel>{
+                      _toasterJavascriptChannel(context),
+                    },
+                    navigationDelegate: (NavigationRequest request) {
+                      return NavigationDecision.navigate;
+                    },
+                    onPageStarted: (String url) {
+                      print('Page started loading: $url');
+                    },
+                    onPageFinished: (String url) {
+                      print('Page finished loading: $url');
+                    },
+                    gestureNavigationEnabled: true,
+                    backgroundColor: Colors.white,
+                  );
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );

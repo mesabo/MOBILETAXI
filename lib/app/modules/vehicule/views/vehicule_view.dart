@@ -32,7 +32,7 @@ class VehiculeView extends GetView<VehiculeController> {
                         Text(
                           '${ctlVehicule.tempVehiculeList.length}',
                           style: const TextStyle(
-                              color: Colors.blue,
+                              color: Colors.green,
                               fontSize: 22,
                               fontWeight: FontWeight.bold),
                         ),
@@ -42,7 +42,7 @@ class VehiculeView extends GetView<VehiculeController> {
                   // middle: const Text("Gestion Véhicules"),
                   trailing: Material(
                       child: IconButton(
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(CupertinoIcons.add_circled_solid),
                     onPressed: () async {
                       ctlVehicule.listerCategories();
                       // await ctlVehicule.ListerCategories();

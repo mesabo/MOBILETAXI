@@ -12,8 +12,6 @@ import '../modules/driver/bindings/driver_binding.dart';
 import '../modules/driver/views/driver_view.dart';
 import '../modules/finance/bindings/finance_binding.dart';
 import '../modules/finance/children/repport/bindings/repport_binding.dart';
-import '../modules/finance/children/repport/bindings/repport_binding.dart';
-import '../modules/finance/children/repport/views/repport_view.dart';
 import '../modules/finance/children/repport/views/repport_view.dart';
 import '../modules/finance/views/finance_view.dart';
 import '../modules/home/bindings/home_binding.dart';

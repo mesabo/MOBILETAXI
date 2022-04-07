@@ -39,7 +39,7 @@ class FinanceView extends GetView<FinanceController> {
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Colors.blue,
+              color: LightColor.yellow,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +63,7 @@ class FinanceView extends GetView<FinanceController> {
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Colors.pink,
+              color: LightColor.yellow2,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -300,7 +300,7 @@ class FinanceView extends GetView<FinanceController> {
         /// RECHARGEMENT
         // soldeCard(context, titre: "Argent comptant", montant: "200000"),
         soldeCard(context,
-            titre: "Argent comptant",
+            titre: "Recharger un chauffeur",
             montant: ctlRechargement.rechargements.value.solde ?? 0,
             active: true,
             action: () => Get.toNamed(Routes.RECHARGEMENT))
@@ -321,7 +321,7 @@ class FinanceView extends GetView<FinanceController> {
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: Container(
                 height: 10.h,
-                color: LightColor.navyBlue1,
+                color: LightColor.grey,
                 child: Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
@@ -331,10 +331,10 @@ class FinanceView extends GetView<FinanceController> {
                       children: <Widget>[
                         Text(
                           titre,
-                          style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.bold,
+                              color: LightColor.navyBlue2),
                         ),
                         const SizedBox(height: 10),
                         Row(
@@ -346,39 +346,39 @@ class FinanceView extends GetView<FinanceController> {
                                 style: GoogleFonts.mulish(
                                     textStyle:
                                         Theme.of(context).textTheme.headline4,
-                                    fontSize: 20.sp,
+                                    fontSize: 22.sp,
                                     fontWeight: FontWeight.w800,
-                                    color: LightColor.yellow2),
+                                    color: LightColor.navyBlue1),
                               )
                             ])
                       ],
                     ),
-                    const Positioned(
-                      left: -170,
-                      top: -170,
-                      child: CircleAvatar(
-                        radius: 130,
-                        backgroundColor: LightColor.lightBlue2,
-                      ),
-                    ),
-                    const Positioned(
-                      left: -160,
-                      top: -190,
-                      child: CircleAvatar(
-                        radius: 130,
-                        backgroundColor: LightColor.lightBlue1,
-                      ),
-                    ),
-                    active
-                        ? const SizedBox()
-                        : const Positioned(
-                            right: -170,
-                            bottom: -170,
-                            child: CircleAvatar(
-                              radius: 130,
-                              backgroundColor: LightColor.yellow2,
-                            ),
-                          ),
+                    // const Positioned(
+                    //   left: -170,
+                    //   top: -170,
+                    //   child: CircleAvatar(
+                    //     radius: 130,
+                    //     backgroundColor: LightColor.lightGrey,
+                    //   ),
+                    // ),
+                    // const Positioned(
+                    //   left: -160,
+                    //   top: -190,
+                    //   child: CircleAvatar(
+                    //     radius: 130,
+                    //     backgroundColor: LightColor.grey,
+                    //   ),
+                    // ),
+                    // active
+                    //     ? const SizedBox()
+                    //     : const Positioned(
+                    //         right: -170,
+                    //         bottom: -170,
+                    //         child: CircleAvatar(
+                    //           radius: 130,
+                    //           backgroundColor: LightColor.yellow2,
+                    //         ),
+                    //       ),
                     active
                         ? const SizedBox()
                         : const Positioned(

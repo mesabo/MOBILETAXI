@@ -11,7 +11,7 @@ class AppTheme {
     primarySwatch: Colors.blue,
     backgroundColor: LightColor.background,
     primaryColor: LightColor.navyBlue1,
-    cardTheme: const CardTheme(color: LightColor.navyBlue2),
+    // cardTheme: const CardTheme(color: LightColor.navyBlue2),
     iconTheme: const IconThemeData(color: LightColor.navyBlue2),
     bottomAppBarColor: LightColor.background,
     dividerColor: LightColor.lightGrey,

@@ -9,7 +9,9 @@ class ReversementView extends GetView<ReversementController> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: const PaiementWebviewPage(),
+      child: const PaiementWeb(
+        url: '',
+      ),
     );
   }
 }

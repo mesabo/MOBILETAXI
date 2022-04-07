@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
+import 'package:fredy_proprio/app/data/providers/providers.dart';
 import 'package:fredy_proprio/app/modules/dashboard/children/rapportactivite/views/rapportactivite_view.dart';
+import 'package:fredy_proprio/app/modules/flotter/maflotte.dart';
+import 'package:fredy_proprio/app/modules/rechargement/views/payment_web_view.dart';
 import 'package:fredy_proprio/app/routes/app_pages.dart';
 import 'package:fredy_proprio/app/themes/colors/app_colors.dart';
-import 'package:fredy_proprio/app/utils/app_images.dart';
+import 'package:fredy_proprio/app/themes/colors/light_color.dart';
 
 import 'package:get/get.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../controllers/dashboard_controller.dart';
 
@@ -50,7 +52,10 @@ class DashboardView extends GetView<DashboardController> {
                           .toString();
                       reverserMontantDialog(context);
                     },
-                    child: const Text("Reverser")),
+                    child: const Text(
+                      "Reverser",
+                      style: TextStyle(color: LightColor.navyBlue1),
+                    )),
               ),
             ],
           ),
@@ -62,30 +67,51 @@ class DashboardView extends GetView<DashboardController> {
             },
             child: rapportActivite(),
           ),
+          InkWell(
+            onTap: () async {
+              proFlotte
+                  .getLienFlotte(proprio_id: helper.proprioInfo.value.id ?? 0)
+                  .then((value) {
+                printInfo(info: "${value.lien}");
+                if (value.lien != null && value.lien!.isNotEmpty) {
+                  Get.to(() => FlottePage(url: value.lien ?? "www.google.ci"));
+                } else {
+                  Get.snackbar("Merci", "Page web non disponible actuellement",
+                      colorText: AppColor.PWHITE0,
+                      duration: const Duration(seconds: 5),
+                      backgroundColor: LightColor.yellow2);
+                }
+              });
+            },
+            child: const Card(
+                elevation: 4.0,
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: ListTile(
+                  title: Text("Consulter ma flotte"),
+                  trailing: Icon(CupertinoIcons.link),
+                )),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: <Widget>[
                 Expanded(
-                  flex: 2,
-                  child: _buildTile(
-                    color: Colors.pink,
-                    icon: Icons.monetization_on,
-                    title: "Montant à percevoir",
-                    data:
-                        "${ctlDashboard.dashboardResume.value.apercevoir ?? 0} F",
-                  ),
-                ),
+                    flex: 2,
+                    child: _buildTile(
+                        color: LightColor.yellow2,
+                        icon: Icons.monetization_on,
+                        title: "Montant à percevoir",
+                        data:
+                            "${ctlDashboard.dashboardResume.value.apercevoir ?? 0} F")),
                 const SizedBox(width: 16.0),
                 Expanded(
-                  child: _buildTile(
-                    color: Colors.green,
-                    icon: Icons.done_all,
-                    title: "Montant à reverser",
-                    data:
-                        "${ctlDashboard.dashboardResume.value.areverser ?? 0} F",
-                  ),
-                ),
+                    child: _buildTile(
+                        color: Colors.green,
+                        icon: Icons.done_all,
+                        title: "Montant à reverser",
+                        data:
+                            "${ctlDashboard.dashboardResume.value.areverser ?? 0} F"))
               ],
             ),
           ),
@@ -96,7 +122,7 @@ class DashboardView extends GetView<DashboardController> {
               children: <Widget>[
                 Expanded(
                   child: _buildTile(
-                    color: Colors.blue,
+                    color: LightColor.yellow,
                     icon: Icons.group,
                     title: "Chauffeurs",
                     data:
@@ -106,7 +132,7 @@ class DashboardView extends GetView<DashboardController> {
                 const SizedBox(width: 16.0),
                 Expanded(
                   child: _buildTile(
-                    color: Colors.pink,
+                    color: LightColor.yellow,
                     icon: Icons.drive_eta_rounded,
                     title: "Véhicules",
                     data:
@@ -116,7 +142,7 @@ class DashboardView extends GetView<DashboardController> {
                 const SizedBox(width: 16.0),
                 Expanded(
                   child: _buildTile(
-                    color: Colors.blue,
+                    color: LightColor.yellow,
                     icon: FontAwesomeIcons.car,
                     title: "Véhicules actifs",
                     data:
@@ -195,16 +221,20 @@ class DashboardView extends GetView<DashboardController> {
                                 .toString()) <=
                             double.parse(
                                 ctlDashboard.montantTC.text.toString())) {
-                      ctlReversement.genererLienPaiement(
-                          helper.proprioInfo.value.id ?? 0,
-                          ctlDashboard.montantTC.text);
-                      Get.toNamed(Routes.REVERSEMENT);
-                      Get.snackbar("Merci",
-                          "Veuillez à présent valider votre paiement via votre service mobile money!",
-                          colorText: AppColor.PWHITE0,
-                          duration: const Duration(seconds: 5),
-                          backgroundColor: AppColor.PRED1,
-                          snackPosition: SnackPosition.BOTTOM);
+                      ctlReversement
+                          .genererLienPaiement(helper.proprioInfo.value.id ?? 0,
+                              ctlDashboard.montantTC.text)
+                          .then((value) async {
+                        if (value.isNotEmpty) {
+                          Get.to(() => PaiementWeb(url: value));
+                          Get.snackbar("Merci",
+                              "Veuillez à présent valider votre paiement via votre service mobile money!",
+                              colorText: AppColor.PWHITE0,
+                              duration: const Duration(seconds: 5),
+                              backgroundColor: LightColor.yellow2,
+                              snackPosition: SnackPosition.BOTTOM);
+                        }
+                      });
                     } else {
                       Get.snackbar("Oups!!", "Saisissez une valeur valide");
                     }
@@ -221,7 +251,7 @@ class DashboardView extends GetView<DashboardController> {
     return Card(
       elevation: 4.0,
       color: Colors.white,
-      margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -322,7 +352,7 @@ class DashboardView extends GetView<DashboardController> {
           bottomLeft: Radius.circular(20.0),
           bottomRight: Radius.circular(20.0),
         ),
-        color: Colors.blue,
+        color: LightColor.navyBlue1,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

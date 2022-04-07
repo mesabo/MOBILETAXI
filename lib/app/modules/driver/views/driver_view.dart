@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/modules/driver/views/driver_add_view.dart';
 import 'package:fredy_proprio/app/modules/driver/views/driver_items_view.dart';
+import 'package:fredy_proprio/app/themes/colors/app_colors.dart';
 
 import 'package:get/get.dart';
 
@@ -36,13 +37,14 @@ class DriverView extends GetView<DriverController> {
                         style: const TextStyle(
                             // color: Colors.blue,
                             fontSize: 22,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.PBLUE),
                       ),
                     ],
                   ),
                   // middle: const Text("Gestion Chauffeurs"),
                   trailing: IconButton(
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(CupertinoIcons.add_circled_solid),
                     onPressed: () {
                       // ctlDriver.ListerDrivers();
                       ctlDriver.isEditing.value = false;

@@ -14,7 +14,7 @@ class BalanceCard extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         child: Container(
           height: 15.h,
-          color: LightColor.navyBlue1,
+          color: LightColor.yellow2,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
@@ -40,7 +40,7 @@ class BalanceCard extends StatelessWidget {
                               textStyle: Theme.of(context).textTheme.headline4,
                               fontSize: 22.sp,
                               fontWeight: FontWeight.w800,
-                              color: LightColor.yellow2),
+                              color: LightColor.navyBlue1),
                         )
                       ])
                 ],
@@ -50,7 +50,7 @@ class BalanceCard extends StatelessWidget {
                 top: -170,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: LightColor.lightBlue2,
+                  backgroundColor: LightColor.grey,
                 ),
               ),
               const Positioned(
@@ -58,7 +58,7 @@ class BalanceCard extends StatelessWidget {
                 top: -190,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: LightColor.lightBlue1,
+                  backgroundColor: LightColor.lightGrey,
                 ),
               ),
               const Positioned(

@@ -43,6 +43,9 @@ class APPURL {
   static const POST_VEHICULE = "PostVehicule?";
   static const PUT_VEHICULE = "PutVehicule?";
 
+  ///`FLOTTER`
+  static const GET_LIEN_FLOTTE = "getLienFlotte?";
+
   ///`RECHARGEMENT`
   static const GET_LIEN_RECHARGE = "getLienRechargementProprio?";
   static const GET_LISTER_HISTORIQUE_RECHARGE = "getListerHistoriqueOperation?";

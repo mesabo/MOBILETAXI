@@ -24,8 +24,6 @@ class _RechargementViewState extends State<RechargementView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        // _icon(Icons.mobile_friendly, "Moi",
-        //     () => Get.to(() => const MoneyTransferPage())),
         _icon(Icons.drive_eta_outlined, "Chauffeur",
             () => Get.to(() => const ContacterParticulier())),
       ],
@@ -42,7 +40,7 @@ class _RechargementViewState extends State<RechargementView> {
             width: 85.w,
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: const BoxDecoration(
-                color: Colors.white,
+                color: LightColor.grey,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
@@ -74,11 +72,12 @@ class _RechargementViewState extends State<RechargementView> {
   //   );
   // }
 
-  Widget _transection({required Operation operation}) {
+  Widget _transaction({required Operation operation}) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(),
       title: TitleText(
-        text: operation.telDest ?? "",
+        text:
+            "${operation.destinataireContact ?? ''} à ${operation.beneficiaireContact ?? ''}",
         fontSize: 14,
       ),
       subtitle: Text(operation.date ?? ""),
@@ -96,6 +95,7 @@ class _RechargementViewState extends State<RechargementView> {
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: LightColor.navyBlue2))),
+      onTap: () {},
     );
   }
 
@@ -117,27 +117,22 @@ class _RechargementViewState extends State<RechargementView> {
                 height: 60.h,
                 child: ListView(children: <Widget>[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: const Icon(CupertinoIcons.left_chevron)),
-                      const TitleText(text: "Mon solde (Argent comptant)"),
-                    ],
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: const Icon(CupertinoIcons.left_chevron)),
+                        const TitleText(text: "Mon solde (Argent comptant)")
+                      ]),
                   BalanceCard(
                       montant: ctlRechargement.rechargements.value.solde),
                   const SizedBox(height: 10),
-                  const TitleText(
-                    text: "Recharger Compte",
-                  ),
+                  const TitleText(text: "Recharger Compte"),
                   _operationsWidget(),
                   const SizedBox(height: 40),
-                  const TitleText(
-                    text: "Historique Transactions",
-                  ),
+                  const TitleText(text: "Historique Transactions"),
                   const Divider(thickness: 2)
                 ]),
               ),
@@ -145,15 +140,15 @@ class _RechargementViewState extends State<RechargementView> {
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
                     height: 40.h,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: <Widget>[
-                        for (var operation
-                            in ctlRechargement.rechargements.value.operation ??
+                    child: Obx(() => ListView(
+                          shrinkWrap: true,
+                          children: <Widget>[
+                            for (var operation in ctlRechargement
+                                    .rechargements.value.operation ??
                                 [])
-                          _transection(operation: operation),
-                      ],
-                    ),
+                              _transaction(operation: operation),
+                          ],
+                        )),
                   ))
             ],
           ),

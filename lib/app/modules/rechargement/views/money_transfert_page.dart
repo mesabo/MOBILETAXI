@@ -144,7 +144,7 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: LightColor.yellow2,
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(

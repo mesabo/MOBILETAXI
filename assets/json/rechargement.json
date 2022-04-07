@@ -1,15 +1,21 @@
 {
+    "bSuccess": true,
+    "message": "succes",
+    "proprio_id": 108,
+    "solde": 492,
     "operation": [
         {
-            "id": 12,
-            "reference": "10-8711233259",
-            "tel_dest": "",
-            "montant": 400,
+            "id": 51,
+            "reference": "51-1426635088",
+            "montant": 178,
+            "destinataire_contact": "0544551395",
+            "beneficiaire_id": "",
+            "beneficiaire_contact": "",
+            "beneficiaire_nom": "",
+            "beneficiaire_prenom": "",
             "type": "depot",
-            "date": "2022-03-31 21:07:08",
-            "status": 1
+            "date": "2022-04-05 19:41:53",
+            "status": "SUCCESS"
         }
-    ],
-    "proprio_id": 108,
-    "solde": 100
+    ]
 }
