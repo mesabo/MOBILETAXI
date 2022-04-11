@@ -18,8 +18,10 @@ class DriverController extends GetxController {
   TextEditingController vehiculeTC = TextEditingController();
   TextEditingController nomTC = TextEditingController();
   TextEditingController prenomTC = TextEditingController();
-  TextEditingController permisTC = TextEditingController();
   TextEditingController telephoneTC = TextEditingController();
+  TextEditingController nautorisationTC = TextEditingController();
+  TextEditingController ncertaptitudeTC = TextEditingController();
+  TextEditingController permisTC = TextEditingController();
   TextEditingController photoTC = TextEditingController();
 
   TextEditingController startTC = TextEditingController();
@@ -125,6 +127,8 @@ class DriverController extends GetxController {
       numero_permis: permisTC.text.trim().toUpperCase(),
       telephone: telephoneTC.text,
       image_permis: "NO_IMAGE",
+      numero_autorisation: nautorisationTC.text.toString().trim(),
+      numero_cert_aptitude: ncertaptitudeTC.text.toString().trim(),
     );
     clearTextFields();
     ctlVehicule.listerVehicules();
@@ -144,7 +148,9 @@ class DriverController extends GetxController {
       prenom: prenomTC.text.trim().toUpperCase(),
       numero_permis: permisTC.text.trim().toUpperCase(),
       telephone: telephoneTC.text,
-      image_permis: "RIEN",
+      image_permis: "NO_IMAGE",
+      numero_autorisation: nautorisationTC.text.toString().trim(),
+      numero_cert_aptitude: ncertaptitudeTC.text.toString().trim(),
     );
     ctlVehicule.listerVehicules();
     ctlDriver.ListerDrivers();

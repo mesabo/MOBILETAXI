@@ -6,6 +6,8 @@ class Driver {
   String? numeroPermis;
   String? imagePermis;
   int? vehiculeId;
+  String? numeroAutorisation;
+  String? numeroCertificatAptitude;
 
   Driver(
       {this.id,
@@ -14,7 +16,9 @@ class Driver {
       this.telephone,
       this.numeroPermis,
       this.imagePermis,
-      this.vehiculeId});
+      this.vehiculeId,
+      this.numeroAutorisation,
+      this.numeroCertificatAptitude});
 
   Driver.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,7 +28,8 @@ class Driver {
     numeroPermis = json['numero_permis'];
     imagePermis = json['image_permis'];
     vehiculeId = json['vehicule_id'];
-    // vehiculeId = int.tryParse( json['vehicule_id']); //TODO try to correct this in db before receive it
+    numeroAutorisation = json['numero_autorisation '];
+    numeroCertificatAptitude = json['numero_certificat_aptitude'];
   }
 
   Map<String, dynamic> toJson() {
@@ -36,6 +41,8 @@ class Driver {
     data['numero_permis'] = numeroPermis;
     data['image_permis'] = imagePermis;
     data['vehicule_id'] = vehiculeId;
+    data['numero_autorisation '] = numeroAutorisation;
+    data['numero_certificat_aptitude'] = numeroCertificatAptitude;
     return data;
   }
 }

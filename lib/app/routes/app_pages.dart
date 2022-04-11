@@ -16,6 +16,8 @@ import '../modules/finance/children/repport/views/repport_view.dart';
 import '../modules/finance/views/finance_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/licence/bindings/licence_binding.dart';
+import '../modules/licence/views/licence_view.dart';
 import '../modules/newpassword/bindings/newpassword_binding.dart';
 import '../modules/newpassword/views/newpassword_view.dart';
 import '../modules/oldpassword/bindings/oldpassword_binding.dart';
@@ -173,6 +175,11 @@ class AppPages {
       name: _Paths.RECHARGEMENT,
       page: () => RechargementView(),
       binding: RechargementBinding(),
+    ),
+    GetPage(
+      name: _Paths.LICENCE,
+      page: () => LicenceView(),
+      binding: LicenceBinding(),
     ),
   ];
 }

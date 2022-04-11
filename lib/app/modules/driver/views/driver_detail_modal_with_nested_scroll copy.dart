@@ -92,6 +92,10 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                               ctlDriver.prenomTC.text = driver.prenom ?? '';
                               ctlDriver.telephoneTC.text =
                                   driver.telephone ?? '';
+                              ctlDriver.nautorisationTC.text =
+                                  driver.numeroAutorisation ?? '';
+                              ctlDriver.ncertaptitudeTC.text =
+                                  driver.numeroCertificatAptitude ?? '';
 
                               Get.to(() => DriverAddView());
                             },

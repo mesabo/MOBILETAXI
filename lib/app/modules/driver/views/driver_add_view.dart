@@ -116,6 +116,18 @@ class DriverAddView extends GetView {
                     label: "Téléphone",
                     keyboardType: TextInputType.phone,
                     inputAction: TextInputAction.next),
+                chapsSaisie(
+                    controller: ctlDriver.nautorisationTC,
+                    hint: "XXXXXXXXXX",
+                    label: "N° Transport",
+                    keyboardType: TextInputType.text,
+                    inputAction: TextInputAction.next),
+                chapsSaisie(
+                    controller: ctlDriver.ncertaptitudeTC,
+                    hint: "XXXXXXXXXX",
+                    label: "N° Cert Aptitude",
+                    keyboardType: TextInputType.text,
+                    inputAction: TextInputAction.done),
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),

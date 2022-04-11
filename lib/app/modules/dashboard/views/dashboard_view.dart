@@ -11,6 +11,7 @@ import 'package:fredy_proprio/app/themes/colors/app_colors.dart';
 import 'package:fredy_proprio/app/themes/colors/light_color.dart';
 
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../controllers/dashboard_controller.dart';
 
@@ -407,7 +408,7 @@ class DashboardView extends GetView<DashboardController> {
       required String data}) {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      height: 150.0,
+      height: 16.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4.0),
         color: color,
@@ -422,12 +423,15 @@ class DashboardView extends GetView<DashboardController> {
           ),
           Text(
             title,
-            style: whiteText.copyWith(fontWeight: FontWeight.bold),
+            style: whiteText.copyWith(
+                fontWeight: FontWeight.bold, fontSize: 12.sp),
           ),
           Text(
             data,
-            style:
-                whiteText.copyWith(fontWeight: FontWeight.bold, fontSize: 20.0),
+            style: whiteText.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.sp,
+                color: Colors.black),
           ),
         ],
       ),

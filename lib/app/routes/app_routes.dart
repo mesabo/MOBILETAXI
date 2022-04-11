@@ -28,6 +28,7 @@ abstract class Routes {
       _Paths.DASHBOARD + _Paths.CHILDREN + _Paths.RAPPORTACTIVITE;
   static const REVERSEMENT = _Paths.REVERSEMENT;
   static const RECHARGEMENT = _Paths.RECHARGEMENT;
+  static const LICENCE = _Paths.LICENCE;
 }
 
 abstract class _Paths {
@@ -56,4 +57,5 @@ abstract class _Paths {
   static const RAPPORTACTIVITE = '/rapportactivite';
   static const REVERSEMENT = '/reversement';
   static const RECHARGEMENT = '/rechargement';
+  static const LICENCE = '/licence';
 }

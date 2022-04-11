@@ -34,6 +34,7 @@ void main() async {
       darkTheme: AppTheme().darkThemeData,
       themeMode: ThemeService().theme,
       initialRoute: helper.connected.value ? Routes.HOME : AppPages.INITIAL,
+      // initialRoute: Routes.LICENCE,
       getPages: AppPages.routes,
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
         DefaultMaterialLocalizations.delegate,

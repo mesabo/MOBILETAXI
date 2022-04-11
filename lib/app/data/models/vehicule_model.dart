@@ -6,7 +6,11 @@ class Vehicule {
   String? couleur;
   String? annee;
   String? categorie;
+  String? numeroAssurance;
+  String? numeroVignette;
+  String? numeroCarteTransport;
   int? status;
+  VehiculeLibre? vehiculeLibre;
 
   Vehicule(
       {this.id,
@@ -16,7 +20,11 @@ class Vehicule {
       this.couleur,
       this.annee,
       this.categorie,
-      this.status});
+      this.numeroAssurance,
+      this.numeroVignette,
+      this.numeroCarteTransport,
+      this.status,
+      this.vehiculeLibre});
 
   Vehicule.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -26,8 +34,13 @@ class Vehicule {
     couleur = json['couleur'];
     annee = json['annee'];
     categorie = json['categorie'];
+    numeroAssurance = json['numero_assurance'];
+    numeroVignette = json['numero_vignette'];
+    numeroCarteTransport = json['numero_carte_transport'];
     status = json['status'];
-  
+    vehiculeLibre = json['VehiculeLibre'] != null
+        ? VehiculeLibre?.fromJson(json['VehiculeLibre'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -39,8 +52,13 @@ class Vehicule {
     data['couleur'] = couleur;
     data['annee'] = annee;
     data['categorie'] = categorie;
+    data['numero_assurance'] = numeroAssurance;
+    data['numero_vignette'] = numeroVignette;
+    data['numero_carte_transport'] = numeroCarteTransport;
     data['status'] = status;
-   
+    if (vehiculeLibre != null) {
+      data['VehiculeLibre'] = vehiculeLibre?.toJson();
+    }
     return data;
   }
 }

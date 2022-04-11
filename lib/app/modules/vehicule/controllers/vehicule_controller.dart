@@ -17,6 +17,10 @@ class VehiculeController extends GetxController {
   TextEditingController couleurTC = TextEditingController();
   TextEditingController anneeTC = TextEditingController();
   TextEditingController categorieTC = TextEditingController();
+  TextEditingController nvignetteTC = TextEditingController();
+  TextEditingController numeroAssuranceTC = TextEditingController();
+  TextEditingController numeroVignetteTC = TextEditingController();
+  TextEditingController numeroCarteTransportTC = TextEditingController();
   RxInt categorieID = 0.obs;
 
   RxBool isEditing = false.obs;
@@ -125,13 +129,17 @@ class VehiculeController extends GetxController {
   Future<Retour> addVehicule() async {
     istLoading.value = true;
     Retour _retour = await provVehicule.postVehicule(
-        proprio_id: helper.proprioInfo.value.id ?? 0,
-        immatriculation: immatTC.text.trim().toUpperCase(),
-        categorie_id: categorieID.value,
-        marque: marqueTC.text.trim().toUpperCase(),
-        modele: modelTC.text.trim().toUpperCase(),
-        couleur: couleurTC.text.trim().toUpperCase(),
-        annee: vehiculeAnnee.value.toString().substring(0, 10));
+      proprio_id: helper.proprioInfo.value.id ?? 0,
+      immatriculation: immatTC.text.trim().toUpperCase(),
+      categorie_id: categorieID.value,
+      marque: marqueTC.text.trim().toUpperCase(),
+      modele: modelTC.text.trim().toUpperCase(),
+      couleur: couleurTC.text.trim().toUpperCase(),
+      annee: vehiculeAnnee.value.toString().substring(0, 10),
+      nassurance: numeroAssuranceTC.text.trim().toUpperCase(),
+      nvignette: numeroVignetteTC.text.trim().toUpperCase(),
+      ncartetransp: numeroCarteTransportTC.text.trim().toUpperCase(),
+    );
     listerVehicules();
     // istLoading.value = false;
 
@@ -151,6 +159,9 @@ class VehiculeController extends GetxController {
       couleur: couleurTC.text.trim().toUpperCase(),
       statut: 1,
       annee: vehiculeAnnee.value.toString().substring(0, 10),
+      nassurance: numeroAssuranceTC.text.trim().toUpperCase(),
+      nvignette: numeroVignetteTC.text.trim().toUpperCase(),
+      ncartetransp: numeroCarteTransportTC.text.trim().toUpperCase(),
     );
     istLoading.value = false;
     listerVehicules();

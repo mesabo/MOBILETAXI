@@ -74,6 +74,12 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                         ctlVehicule.marqueTC.text = vehicule.marque.toString();
                         ctlVehicule.couleurTC.text =
                             vehicule.couleur.toString();
+                        ctlVehicule.numeroAssuranceTC.text =
+                            vehicule.numeroAssurance.toString();
+                        ctlVehicule.numeroCarteTransportTC.text =
+                            vehicule.numeroCarteTransport.toString();
+                        ctlVehicule.numeroVignetteTC.text =
+                            vehicule.numeroVignette.toString();
 
                         Get.to(() => VehiculeAddView());
                       },
@@ -85,7 +91,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.0),
                     border: Border.all(color: border),
                   ),
-                  child: Column(
+                  child: ListView(
                     children: <Widget>[
                       const SizedBox(height: 10.0),
                       Padding(
@@ -111,7 +117,6 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                             const SizedBox(width: 5.0),
                             Text(
                                 "${ctlVehicule.vehiculeResume.value.montantJour ?? 0} F"),
-                            Spacer(),
                           ],
                         ),
                       ),

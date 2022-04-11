@@ -5,5 +5,7 @@
     "telephone": "0757777500",
     "numero_permis": "ORDINAIRE",
     "image_permis": "ORDINAIRE",
-    "vehicule_id": 1
+    "vehicule_id": 1,
+    "numero_autorisation ": "numero_autorisation",
+    "numero_certificat_aptitude": "numero_certificat_aptitude"
 }

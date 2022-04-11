@@ -61,10 +61,12 @@ class DriverProvider {
     required String numero_permis,
     required String telephone,
     required String image_permis,
+    required String numero_autorisation,
+    required String numero_cert_aptitude,
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.PUT_DRIVER +
-        "id=$id&nom=$nom&prenom=$prenom&numero_permis=$numero_permis&telephone=$telephone&proprio_id=$proprio_id&image_permis=$image_permis";
+        "id=$id&nom=$nom&prenom=$prenom&numero_permis=$numero_permis&telephone=$telephone&proprio_id=$proprio_id&image_permis=$image_permis&numero_autorisation=$numero_autorisation&numero_cert_aptitude=$numero_cert_aptitude";
     final response = await http.put(Uri.parse(url));
     return parseRetour(response.body);
   }
@@ -77,11 +79,13 @@ class DriverProvider {
     required String numero_permis,
     required String telephone,
     required String image_permis,
+    required String numero_autorisation,
+    required String numero_cert_aptitude,
     image,
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.POST_DRIVER +
-        "nom=$nom&prenom=$prenom&numero_permis=$numero_permis&telephone=$telephone&proprio_id=$proprio_id&image_permis=$image_permis";
+        "nom=$nom&prenom=$prenom&numero_permis=$numero_permis&telephone=$telephone&proprio_id=$proprio_id&image_permis=$image_permis&numero_autorisation=$numero_autorisation&numero_cert_aptitude=$numero_cert_aptitude";
     final response = await http.post(Uri.parse(url));
 
     return parseRetour(response.body);

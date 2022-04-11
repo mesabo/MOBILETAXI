@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/data/services/local_storage.dart';
+import 'package:fredy_proprio/app/modules/licence/views/licence_view.dart';
+import 'package:fredy_proprio/app/modules/setting/children/licenses/views/licenses_view.dart';
 import 'package:fredy_proprio/app/routes/app_pages.dart';
 import 'package:fredy_proprio/app/themes/colors/app_colors.dart';
 import 'package:fredy_proprio/app/themes/themeservice.dart';
@@ -50,14 +52,10 @@ class SettingView extends GetView<SettingController> {
                 //             backgroundImage: NetworkImage(AppImage.userImage)),
                 //         trailing: const Icon(Icons.edit, color: Colors.white))),
                 const SizedBox(height: 10.0),
-                Card(
-                  elevation: 4.0,
-                  margin: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
+                Column(
+                  children: <Widget>[
+                    Card(
+                      child: ListTile(
                         leading: const Icon(
                           Icons.lock_outline,
                           color: Colors.orange,
@@ -68,21 +66,23 @@ class SettingView extends GetView<SettingController> {
                           Get.toNamed(Routes.CHANGEPASSWORD);
                         },
                       ),
-                      // _buildDivider(),
-                      // ListTile(
-                      //   leading: const Icon(
-                      //     FontAwesomeIcons.language,
-                      //     color: Colors.orange,
-                      //   ),
-                      //   title: const Text("Changer Thème"),
-                      //   trailing: const Icon(Icons.color_lens),
-                      //   onTap: () {
-                      //     ThemeService().switchTheme();
-                      //     ctlSetting.changethemetext();
-                      //   },
-                      // ),
-                      _buildDivider(),
-                      ListTile(
+                    ),
+                    //
+                    // ListTile(
+                    //   leading: const Icon(
+                    //     FontAwesomeIcons.language,
+                    //     color: Colors.orange,
+                    //   ),
+                    //   title: const Text("Changer Thème"),
+                    //   trailing: const Icon(Icons.color_lens),
+                    //   onTap: () {
+                    //     ThemeService().switchTheme();
+                    //     ctlSetting.changethemetext();
+                    //   },
+                    // ),
+
+                    Card(
+                      child: ListTile(
                         leading: const Icon(
                           FontAwesomeIcons.language,
                           color: Colors.orange,
@@ -94,21 +94,37 @@ class SettingView extends GetView<SettingController> {
                           // ctlSetting.changethemetext();
                         },
                       ),
-                      _buildDivider(),
-                      // ListTile(
-                      //   leading: const Icon(
-                      //     CupertinoIcons.color_filter_fill,
-                      //     color: Colors.orange,
-                      //   ),
-                      //   title: const Text("Changer Thème"),
-                      //   trailing: const Icon(Icons.keyboard_arrow_right),
-                      //   onTap: () {
-                      //     ThemeService().switchTheme();
-                      //     ctlSetting.changethemetext();
-                      //   },
-                      // ),
-                      // _buildDivider(),
-                      ListTile(
+                    ),
+
+                    Card(
+                      child: ListTile(
+                        leading: const Icon(
+                          FontAwesomeIcons.linux,
+                          color: Colors.orange,
+                        ),
+                        title: const Text("Conditions d'utilisation"),
+                        trailing: const Icon(Icons.keyboard_arrow_right),
+                        onTap: () {
+                          Get.to(() => LicensesView());
+                        },
+                      ),
+                    ),
+
+                    // ListTile(
+                    //   leading: const Icon(
+                    //     CupertinoIcons.color_filter_fill,
+                    //     color: Colors.orange,
+                    //   ),
+                    //   title: const Text("Changer Thème"),
+                    //   trailing: const Icon(Icons.keyboard_arrow_right),
+                    //   onTap: () {
+                    //     ThemeService().switchTheme();
+                    //     ctlSetting.changethemetext();
+                    //   },
+                    // ),
+                    //
+                    Card(
+                      child: ListTile(
                         leading: const Icon(
                           Icons.location_on,
                           color: Colors.orange,
@@ -121,26 +137,9 @@ class SettingView extends GetView<SettingController> {
                           Get.offAllNamed(Routes.SIGNIN);
                         },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20.0),
-                // const Text(
-                //   "Notifications",
-                //   style: TextStyle(
-                //     fontSize: 20.0,
-                //     fontWeight: FontWeight.bold,
-                //     color: Colors.orange,
-                //   ),
-                // ),
-                // SwitchListTile(
-                //   activeColor: Colors.orange,
-                //   contentPadding: const EdgeInsets.all(0),
-                //   value: true,
-                //   title: const Text("Received notification"),
-                //   onChanged: (val) {},
-                // ),
-                // const SizedBox(height: 60.0),
               ],
             ),
           ),

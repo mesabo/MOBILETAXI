@@ -40,6 +40,21 @@ class VehiculeAddView extends GetView {
                   children: [
                     const SizedBox(height: 20),
                     chapsSaisie(
+                        controller: ctlVehicule.numeroAssuranceTC,
+                        hint: "XXXXXXXXXX",
+                        label: "N° Assurance",
+                        inputAction: TextInputAction.next),
+                    chapsSaisie(
+                        controller: ctlVehicule.nvignetteTC,
+                        hint: "XXXXXXXXXX",
+                        label: "N° Vignette",
+                        inputAction: TextInputAction.next),
+                    chapsSaisie(
+                        controller: ctlVehicule.numeroCarteTransportTC,
+                        hint: "XXXXXXXXXX",
+                        label: "N° Carte Transp",
+                        inputAction: TextInputAction.next),
+                    chapsSaisie(
                         controller: ctlVehicule.immatTC,
                         hint: "1020ZA99.",
                         label: "Immatriculation",

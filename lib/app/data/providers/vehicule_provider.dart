@@ -56,11 +56,14 @@ class VehiculeProvider {
     required String modele,
     required String couleur,
     required String annee,
+    required String nassurance,
+    required String nvignette,
+    required String ncartetransp,
     required int statut,
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.PUT_VEHICULE +
-        "id=$id&proprio_id=$proprio_id&id=$id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&statut=$statut&categorie_id=$categorie_id";
+        "id=$id&proprio_id=$proprio_id&id=$id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&statut=$statut&categorie_id=$categorie_id&numero_assurance=$nvignette&numero_vignette=$nassurance&numero_carte_transport=$ncartetransp";
 
     final response = await http.put(Uri.parse(url));
     return parseRetour(response.body);
@@ -75,10 +78,13 @@ class VehiculeProvider {
     required String modele,
     required String couleur,
     required String annee,
+    required String nassurance,
+    required String nvignette,
+    required String ncartetransp,
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.POST_VEHICULE +
-        "proprio_id=$proprio_id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&categorie_id=$categorie_id";
+        "proprio_id=$proprio_id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&categorie_id=$categorie_id&numero_assurance=$nvignette&numero_vignette=$nassurance&numero_carte_transport=$ncartetransp";
 
     final response = await http.post(Uri.parse(url));
     return parseRetour(response.body);
