@@ -74,12 +74,12 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                         ctlVehicule.marqueTC.text = vehicule.marque.toString();
                         ctlVehicule.couleurTC.text =
                             vehicule.couleur.toString();
-                        ctlVehicule.numeroAssuranceTC.text =
-                            vehicule.numeroAssurance.toString();
+                        ctlVehicule.numeroAssuranceTC.value =
+                            vehicule.numeroAssurance ?? false;
+                        ctlVehicule.numeroVignetteTC.value =
+                            vehicule.numeroVignette ?? false;
                         ctlVehicule.numeroCarteTransportTC.text =
                             vehicule.numeroCarteTransport.toString();
-                        ctlVehicule.numeroVignetteTC.text =
-                            vehicule.numeroVignette.toString();
 
                         Get.to(() => VehiculeAddView());
                       },

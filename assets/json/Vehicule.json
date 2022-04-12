@@ -6,8 +6,8 @@
     "couleur": "Rouge",
     "annee": "2012",
     "categorie": "ORDINAIRE",
-    "numero_assurance": "numero_assurance",
-    "numero_vignette": "numero_vignette",
+    "numero_assurance":false,
+    "numero_vignette": false,
     "numero_carte_transport": "numero_carte_transport",
     "status": 0,
     "VehiculeLibre": {

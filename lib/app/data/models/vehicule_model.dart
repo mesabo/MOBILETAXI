@@ -6,8 +6,8 @@ class Vehicule {
   String? couleur;
   String? annee;
   String? categorie;
-  String? numeroAssurance;
-  String? numeroVignette;
+  bool? numeroAssurance;
+  bool? numeroVignette;
   String? numeroCarteTransport;
   int? status;
   VehiculeLibre? vehiculeLibre;

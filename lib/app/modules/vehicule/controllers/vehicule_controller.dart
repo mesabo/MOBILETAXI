@@ -17,10 +17,10 @@ class VehiculeController extends GetxController {
   TextEditingController couleurTC = TextEditingController();
   TextEditingController anneeTC = TextEditingController();
   TextEditingController categorieTC = TextEditingController();
-  TextEditingController nvignetteTC = TextEditingController();
-  TextEditingController numeroAssuranceTC = TextEditingController();
-  TextEditingController numeroVignetteTC = TextEditingController();
   TextEditingController numeroCarteTransportTC = TextEditingController();
+  TextEditingController nvignetteTC = TextEditingController();
+  RxBool numeroAssuranceTC = false.obs;
+  RxBool numeroVignetteTC = false.obs;
   RxInt categorieID = 0.obs;
 
   RxBool isEditing = false.obs;
@@ -136,8 +136,8 @@ class VehiculeController extends GetxController {
       modele: modelTC.text.trim().toUpperCase(),
       couleur: couleurTC.text.trim().toUpperCase(),
       annee: vehiculeAnnee.value.toString().substring(0, 10),
-      nassurance: numeroAssuranceTC.text.trim().toUpperCase(),
-      nvignette: numeroVignetteTC.text.trim().toUpperCase(),
+      nassurance: numeroAssuranceTC.value,
+      nvignette: numeroVignetteTC.value,
       ncartetransp: numeroCarteTransportTC.text.trim().toUpperCase(),
     );
     listerVehicules();
@@ -159,8 +159,8 @@ class VehiculeController extends GetxController {
       couleur: couleurTC.text.trim().toUpperCase(),
       statut: 1,
       annee: vehiculeAnnee.value.toString().substring(0, 10),
-      nassurance: numeroAssuranceTC.text.trim().toUpperCase(),
-      nvignette: numeroVignetteTC.text.trim().toUpperCase(),
+      nassurance: numeroAssuranceTC.value,
+      nvignette: numeroVignetteTC.value,
       ncartetransp: numeroCarteTransportTC.text.trim().toUpperCase(),
     );
     istLoading.value = false;

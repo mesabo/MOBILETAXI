@@ -56,8 +56,8 @@ class VehiculeProvider {
     required String modele,
     required String couleur,
     required String annee,
-    required String nassurance,
-    required String nvignette,
+    required bool nassurance,
+    required bool nvignette,
     required String ncartetransp,
     required int statut,
   }) async {
@@ -78,8 +78,8 @@ class VehiculeProvider {
     required String modele,
     required String couleur,
     required String annee,
-    required String nassurance,
-    required String nvignette,
+    required bool nassurance,
+    required bool nvignette,
     required String ncartetransp,
   }) async {
     var url = APPURL.BASE_URL +

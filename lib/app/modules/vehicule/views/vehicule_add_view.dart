@@ -28,82 +28,91 @@ class VehiculeAddView extends GetView {
                 ? const Text("Modifier Véhicule", style: redStyle)
                 : const Text("Nouveau Véhicule", style: whiteStyle),
             centerTitle: true),
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              // mainAxisSize: MainAxisSize.min,
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    const SizedBox(height: 20),
-                    chapsSaisie(
-                        controller: ctlVehicule.numeroAssuranceTC,
-                        hint: "XXXXXXXXXX",
-                        label: "N° Assurance",
-                        inputAction: TextInputAction.next),
-                    chapsSaisie(
-                        controller: ctlVehicule.nvignetteTC,
-                        hint: "XXXXXXXXXX",
-                        label: "N° Vignette",
-                        inputAction: TextInputAction.next),
-                    chapsSaisie(
-                        controller: ctlVehicule.numeroCarteTransportTC,
-                        hint: "XXXXXXXXXX",
-                        label: "N° Carte Transp",
-                        inputAction: TextInputAction.next),
-                    chapsSaisie(
-                        controller: ctlVehicule.immatTC,
-                        hint: "1020ZA99.",
-                        label: "Immatriculation",
-                        inputAction: TextInputAction.next),
-                    chapsSaisie(
-                        controller: ctlVehicule.marqueTC,
-                        hint: "Mercedes Benz.",
-                        label: "Marque",
-                        inputAction: TextInputAction.next),
-                    chapsSaisie(
-                        controller: ctlVehicule.modelTC,
-                        hint: "TX 01.",
-                        label: "Modèle",
-                        inputAction: TextInputAction.next),
-                    openChooseAnnee(context),
-                    openChooseCouleur(context),
-                    openChooseCatgeorie(context),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: CupertinoButton(
-                        color: ctlVehicule.isEditing.value
-                            ? AppColor.PRED
-                            : AppColor.PGREY,
-                        child: ctlVehicule.isEditing.value
-                            ? const Text("METTRE A JOUR", style: whiteStyle)
-                            : const Text("ENREGISTRER", style: whiteStyle),
-                        onPressed: () async {
-                          //TODO
-                          if (ctlVehicule.categorieTC.text.isEmpty) {
-                            ctlVehicule.categorieTC.text =
-                                ctlVehicule.categoriesList[10].libelle ?? "";
-                          }
-                          if (_formKey.currentState!.validate()) {
-                            ctlVehicule.isEditing.value
-                                ? await modifierVehicule()
-                                : await enregistrerVehicule();
-                          } else {
-                            Get.snackbar("ENREGISTREMENT VEHICULE",
-                                "Veillez à bien remplir tous les champs");
-                            Get.back();
-                          }
-                        },
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              const SizedBox(height: 20),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: CheckboxListTile(
+                      title: const Text('Vignette'),
+                      subtitle: const Text("Disposez-vous d'une vignette?"),
+                      autofocus: false,
+                      activeColor: Colors.green,
+                      checkColor: Colors.white,
+                      selected: ctlVehicule.numeroVignetteTC.value,
+                      value: ctlVehicule.numeroVignetteTC.value,
+                      onChanged: (value) =>
+                          ctlVehicule.numeroVignetteTC.value = value as bool)),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: CheckboxListTile(
+                      title: const Text('Assurance'),
+                      subtitle:
+                          const Text("Disposez-vous d'une assurance valide?"),
+                      autofocus: false,
+                      activeColor: Colors.green,
+                      checkColor: Colors.white,
+                      selected: ctlVehicule.numeroAssuranceTC.value,
+                      value: ctlVehicule.numeroAssuranceTC.value,
+                      onChanged: (value) =>
+                          ctlVehicule.numeroAssuranceTC.value = value as bool)),
+              chapsSaisie(
+                  controller: ctlVehicule.numeroCarteTransportTC,
+                  hint: "XXXXXXXXXX",
+                  label: "N° Carte Transp",
+                  inputAction: TextInputAction.next),
+              chapsSaisie(
+                  controller: ctlVehicule.immatTC,
+                  hint: "1020ZA99.",
+                  label: "Immatriculation",
+                  inputAction: TextInputAction.next),
+              chapsSaisie(
+                  controller: ctlVehicule.marqueTC,
+                  hint: "Mercedes Benz.",
+                  label: "Marque",
+                  inputAction: TextInputAction.next),
+              chapsSaisie(
+                  controller: ctlVehicule.modelTC,
+                  hint: "TX 01.",
+                  label: "Modèle",
+                  inputAction: TextInputAction.next),
+              openChooseAnnee(context),
+              openChooseCouleur(context),
+              openChooseCatgeorie(context),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: CupertinoButton(
+                  color: ctlVehicule.isEditing.value
+                      ? AppColor.PRED
+                      : AppColor.PGREY,
+                  child: ctlVehicule.isEditing.value
+                      ? const Text("METTRE A JOUR", style: whiteStyle)
+                      : const Text("ENREGISTRER", style: whiteStyle),
+                  onPressed: () async {
+                    //TODO
+                    if (ctlVehicule.categorieTC.text.isEmpty) {
+                      ctlVehicule.categorieTC.text =
+                          ctlVehicule.categoriesList[10].libelle ?? "";
+                    }
+                    if (_formKey.currentState!.validate()) {
+                      ctlVehicule.isEditing.value
+                          ? await modifierVehicule()
+                          : await enregistrerVehicule();
+                    } else {
+                      Get.snackbar("ENREGISTREMENT VEHICULE",
+                          "Veillez à bien remplir tous les champs");
+                      Get.back();
+                    }
+                  },
+                ),
+              )
+            ],
           ),
         ),
       );
