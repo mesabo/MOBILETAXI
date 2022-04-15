@@ -1,25 +1,23 @@
-import 'dart:convert';
-
 import 'package:fredy_proprio/app/data/models/categorie_model.dart';
 import 'package:fredy_proprio/app/data/models/objet_message_model.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/utils/app_urls.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../models/message_support_model.dart';
 import 'decoder_retour.dart';
 
-class MessageSupportProvider extends GetConnect {
-  Future<MessageSupport> postMessageSupport(
+class ResultatProvider extends GetConnect {
+  Future<Resultat> postResultat(
       {required proprio_id, required objetc, required contenu}) async {
     var url = APPURL.BASE_URL +
         APPURL.MESSAGE_SUPPORT_URL +
         "objet=$objetc&contenu=$contenu&client_id=$proprio_id";
-    var _res = MessageSupport();
+    var _res = Resultat();
     final response = await http.post(Uri.parse(url));
     // print(response.body);
-    _res = parseMessageSupport(response.body);
+    _res = parseResultat(response.body);
     return _res;
   }
 
@@ -34,10 +32,10 @@ class MessageSupportProvider extends GetConnect {
 }
 
 class Categorieprovider {
-    Future<List<Categorie>> getCategorie() async {
+  Future<Categorie> getCategorie() async {
     var url = APPURL.BASE_URL + APPURL.GET_CATEGORIE;
     final response = await http.get(Uri.parse(url));
     // print(response.body);
-    return  parseCategories(response.body);
+    return parseCategories(response.body);
   }
 }

@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'driver_detail_modal_with_nested_scroll copy.dart';
 
 class VehiculeItemsView extends GetView {
-  final Vehicule vehicule;
+  final Objet vehicule;
 
   VehiculeItemsView(this.vehicule);
 
@@ -78,7 +78,7 @@ class VehiculeItemsView extends GetView {
     );
   }
 
-  Future<void> showMoreAboutVehicule(BuildContext context, Vehicule vehicule) {
+  Future<void> showMoreAboutVehicule(BuildContext context, Objet vehicule) {
     return showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) => VehiculeDetailNestedScrollModal(

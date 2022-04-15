@@ -1,8 +1,9 @@
 import 'package:fredy_proprio/app/data/models/proprio_model.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
-import 'package:fredy_proprio/app/data/providers/decoder_retour.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/utils/app_urls.dart';
 import 'package:http/http.dart' as http;
+
+import 'decoder_retour.dart';
 
 class ProprioProvider {
   /// EXECUTER REQUETE GET
@@ -38,7 +39,7 @@ class ProprioProvider {
   }
 
   /// EXECUTER REQUETE PUT
-  Future<Retour> putNewPassword({
+  Future<Resultat> putNewPassword({
     required String telephone,
     required String new_password,
   }) async {
@@ -46,11 +47,11 @@ class ProprioProvider {
         APPURL.PUT_NEW_PASSWORD +
         "telephone=$telephone&new_password=$new_password";
     final response = await http.put(Uri.parse(url));
-    return parseRetour(response.body);
+    return parseResultat(response.body);
   }
 
   /// EXECUTER REQUETE POST
-  Future<Retour> postInscription({
+  Future<Resultat> postInscription({
     required String nom,
     required String prenom,
     required String telephone,
@@ -62,6 +63,6 @@ class ProprioProvider {
         "nom=$nom&prenom=$prenom&telephone=$telephone&email=$email&password=$password";
     final response = await http.post(Uri.parse(url));
 
-    return parseRetour(response.body);
+    return parseResultat(response.body);
   }
 }

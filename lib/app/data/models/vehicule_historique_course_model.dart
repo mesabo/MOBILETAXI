@@ -1,35 +1,47 @@
 class VehiculeHistoriqueCourse {
+  bool? bSuccess;
   String? message;
-  List<Objet>? objet;
+  bool? etatConnexion;
   String? totaux;
   String? espece;
   String? dematerialise;
+  List<Objet>? objet;
 
   VehiculeHistoriqueCourse(
-      {this.message, this.objet, this.totaux, this.espece, this.dematerialise});
+      {this.bSuccess,
+      this.message,
+      this.etatConnexion,
+      this.totaux,
+      this.espece,
+      this.dematerialise,
+      this.objet});
 
   VehiculeHistoriqueCourse.fromJson(Map<String, dynamic> json) {
+    bSuccess = json['bSuccess'];
     message = json['message'];
+    etatConnexion = json['etat_connexion'];
+    totaux = json['totaux'];
+    espece = json['espece'];
+    dematerialise = json['dematerialise'];
     if (json['objet'] != null) {
       objet = <Objet>[];
       json['objet'].forEach((v) {
         objet?.add(Objet.fromJson(v));
       });
     }
-    totaux = json['totaux'];
-    espece = json['espece'];
-    dematerialise = json['dematerialise'];
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['bSuccess'] = bSuccess;
     data['message'] = message;
-    if (objet != null) {
-      data['objet'] = objet?.map((v) => v.toJson()).toList();
-    }
+    data['etat_connexion'] = etatConnexion;
     data['totaux'] = totaux;
     data['espece'] = espece;
     data['dematerialise'] = dematerialise;
+    if (objet != null) {
+      data['objet'] = objet?.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

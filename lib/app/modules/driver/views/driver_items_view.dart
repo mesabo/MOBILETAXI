@@ -11,7 +11,7 @@ import 'driver_detail_modal_with_nested_scroll copy.dart';
 
 class DriverItemsView extends GetView {
   final onPressed;
-  final Driver driver;
+  final Objet driver;
   DriverItemsView({
     Key? key,
     this.onPressed,

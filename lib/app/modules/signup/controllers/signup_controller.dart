@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fredy_proprio/app/data/models/proprio_model.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/providers/providers.dart';
 import 'package:fredy_proprio/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -30,7 +29,7 @@ class SignupController extends GetxController {
 
   Future signupFN() async {
     isLoading.value = true;
-    Retour _signup = await provProprio.postInscription(
+    Resultat _signup = await provProprio.postInscription(
         nom: nomTC.text.trim(),
         prenom: prenomTC.text.trim(),
         telephone: phoneTC.text.trim().toLowerCase(),

@@ -1,4 +1,37 @@
 class DashboardResumer {
+  bool? bSuccess;
+  String? message;
+  bool? etatConnexion;
+  List<Objet>? objet;
+
+  DashboardResumer(
+      {this.bSuccess, this.message, this.etatConnexion, this.objet});
+
+  DashboardResumer.fromJson(Map<String, dynamic> json) {
+    bSuccess = json['bSuccess'];
+    message = json['message'];
+    etatConnexion = json['etat_connexion'];
+    if (json['objet'] != null) {
+      objet = <Objet>[];
+      json['objet'].forEach((v) {
+        objet?.add(Objet.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['bSuccess'] = bSuccess;
+    data['message'] = message;
+    data['etat_connexion'] = etatConnexion;
+    if (objet != null) {
+      data['objet'] = objet?.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Objet {
   int? montantJour;
   int? courseJour;
   int? apercevoir;
@@ -7,7 +40,7 @@ class DashboardResumer {
   int? nombreVehicule;
   int? nombreVehculeActif;
 
-  DashboardResumer(
+  Objet(
       {this.montantJour,
       this.courseJour,
       this.apercevoir,
@@ -16,7 +49,7 @@ class DashboardResumer {
       this.nombreVehicule,
       this.nombreVehculeActif});
 
-  DashboardResumer.fromJson(Map<String, dynamic> json) {
+  Objet.fromJson(Map<String, dynamic> json) {
     montantJour = json['montant_jour'];
     courseJour = json['course_jour'];
     apercevoir = json['apercevoir'];

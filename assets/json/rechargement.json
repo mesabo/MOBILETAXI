@@ -1,6 +1,7 @@
 {
     "bSuccess": true,
     "message": "succes",
+    "etat_connexion": true,
     "proprio_id": 108,
     "solde": 492,
     "operation": [

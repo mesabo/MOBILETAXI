@@ -1,22 +1,21 @@
 class Resultat {
-  var bSuccess;
-  var message;
-  var objet;
+  bool? bSuccess;
+  String? message;
+  bool? etatConnexion;
 
-  Resultat({this.bSuccess, this.message, this.objet});
+  Resultat({this.bSuccess, this.message, this.etatConnexion});
 
   Resultat.fromJson(Map<String, dynamic> json) {
     bSuccess = json['bSuccess'];
     message = json['message'];
-    objet = json['objet'];
+    etatConnexion = json['etat_connexion'];
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-
     data['bSuccess'] = bSuccess;
     data['message'] = message;
-    data['objet'] = objet;
+    data['etat_connexion'] = etatConnexion;
     return data;
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
-import 'package:fredy_proprio/app/data/models/driver_model.dart';
+import 'package:fredy_proprio/app/data/models/driver_model.dart' as d;
 import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
 import 'package:fredy_proprio/app/modules/driver/views/driver_add_view.dart';
 import 'package:fredy_proprio/app/modules/driver/views/driver_historique_view.dart';
@@ -13,7 +13,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'attribute_vehicle_modal.dart';
 
 class driverDetailNestedScrollModal extends StatelessWidget {
-  final Driver driver;
+  final d.Objet driver;
   driverDetailNestedScrollModal({Key? key, required this.driver})
       : super(key: key);
 
@@ -69,23 +69,31 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                               ctlDriver.isEditing.value = true;
-                              ctlDriver.driver.value = driver;
+                              ctlDriver.driver.value.objet![0] = driver;
 
                               ctlDriver.nomTC.text = driver.nom ?? '';
                               ctlDriver.prenomTC.text = driver.prenom ?? '';
                               ctlDriver.permisTC.text =
                                   driver.numeroPermis ?? '';
                               ctlDriver.vehiculeTC.text = ctlDriver
-                                      .vehiculeResume.value.immatriculation ??
+                                      .vehiculeResume
+                                      .value
+                                      .objet!
+                                      .first
+                                      .immatriculation ??
                                   '';
 
-                              ctlDriver.vehicleSelected.value = Vehicule(
-                                id: ctlDriver.vehiculeResume.value.id,
-                                immatriculation: ctlDriver
-                                    .vehiculeResume.value.immatriculation,
-                                annee: ctlDriver.vehiculeResume.value.annee,
-                                marque: ctlDriver.vehiculeResume.value.marque,
-                                modele: ctlDriver.vehiculeResume.value.modele,
+                              ctlDriver.vehicleSelected.value!.first = Objet(
+                                id: ctlDriver
+                                    .vehiculeResume.value.objet!.first.id,
+                                immatriculation: ctlDriver.vehiculeResume.value
+                                    .objet!.first.immatriculation,
+                                annee: ctlDriver
+                                    .vehiculeResume.value.objet!.first.annee,
+                                marque: ctlDriver
+                                    .vehiculeResume.value.objet!.first.marque,
+                                modele: ctlDriver
+                                    .vehiculeResume.value.objet!.first.modele,
                               );
 
                               ctlDriver.nomTC.text = driver.nom ?? '';
@@ -134,7 +142,7 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5.0),
                                   Text(
-                                      "${ctlDriver.vehiculeResume.value.distanceJour ?? 0} km"),
+                                      "${ctlDriver.vehiculeResume.value.objet!.first.distanceJour ?? 0} km"),
                                   const Spacer(),
                                   Container(
                                       height: 20.0,
@@ -147,7 +155,7 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5.0),
                                   Text(
-                                      "${ctlDriver.vehiculeResume.value.montantJour ?? 0} F"),
+                                      "${ctlDriver.vehiculeResume.value.objet!.first.montantJour ?? 0} F"),
                                   const Spacer(),
                                 ],
                               ),
@@ -168,13 +176,15 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(ctlVehicule.vehiculesList
+                                        Text(ctlVehicule
+                                                .vehiculesList.value.objet!
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
                                                 .immatriculation ??
                                             'IMMATRICULATION'),
-                                        Text(ctlVehicule.vehiculesList
+                                        Text(ctlVehicule
+                                                .vehiculesList.value.objet!
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
@@ -189,13 +199,15 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       // ignore: prefer_const_literals_to_create_immutables
                                       children: <Widget>[
-                                        Text(ctlVehicule.vehiculesList
+                                        Text(ctlVehicule
+                                                .vehiculesList.value.objet!
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
                                                 .modele ??
                                             "MODELE"),
-                                        Text(ctlVehicule.vehiculesList
+                                        Text(ctlVehicule
+                                                .vehiculesList.value.objet!
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
@@ -208,7 +220,8 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                             CupertinoIcons.list_number),
                                         onPressed: () {
                                           Get.back();
-                                          ctlDriver.driver.value = driver;
+                                          ctlDriver.driver.value.objet![0] =
+                                              driver;
                                           Get.to(DriverHistoriqueView());
                                         })
                                   ]),

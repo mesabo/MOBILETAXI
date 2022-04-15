@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/data/models/categorie_model.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_historique_course_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart';
@@ -46,11 +46,11 @@ class VehiculeController extends GetxController {
     "VIOLETTE",
   ];
 
-  RxList<Categorie> categoriesList = <Categorie>[].obs;
+  Rx<Categorie> categoriesList = Categorie().obs;
   Rx<Vehicule> vehicule = Vehicule().obs;
   Rx<VehiculeResume> vehiculeResume = VehiculeResume().obs;
-  RxList<Vehicule> vehiculesList = <Vehicule>[].obs;
-  RxList<Vehicule> tempVehiculeList = <Vehicule>[].obs;
+  Rx<Vehicule> vehiculesList = Vehicule().obs;
+  Rx<Vehicule> tempVehiculeList = Vehicule().obs;
   RxList<VehiculeHistoriqueCourse> vehiculeHistoriqueList =
       <VehiculeHistoriqueCourse>[].obs;
 
@@ -90,6 +90,7 @@ class VehiculeController extends GetxController {
     istLoading.value = true;
     var _res = await provVehicule.getVehiculeResume(
         proprio_id: helper.proprioInfo.value.id ?? 0,
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         vehicule_id: vehicule_id ?? 0,
         date_jour: _jour);
     if (_res.isNotEmpty) {
@@ -101,13 +102,14 @@ class VehiculeController extends GetxController {
 
   ///`LISTER VEHICULES`
 
-  Future<List<Vehicule>> listerVehicules() async {
+  Future<Vehicule> listerVehicules() async {
     istLoading.value = true;
     vehiculesList.value = await provVehicule.getListerVehicule(
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id ?? 0);
-    tempVehiculeList.value = vehiculesList.reversed.toList();
+    tempVehiculeList.value.objet = vehiculesList.value.objet!.reversed.toList();
     istLoading.value = false;
-    return vehiculesList;
+    return vehiculesList.value;
   }
 
   ///`LISTER HISTORIQUE D'UN VEHICULE`
@@ -117,6 +119,7 @@ class VehiculeController extends GetxController {
     vehiculeHistoriqueList.value =
         await provVehicule.getListerVehiculeHistoriqueCourse(
             proprio_id: helper.proprioInfo.value.id ?? 0,
+            cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
             vehicule_id: vehicule_id,
             date_debut: startDate.value.toString().substring(0, 10),
             date_fin: endedDate.value.toString().substring(0, 10));
@@ -126,10 +129,11 @@ class VehiculeController extends GetxController {
   }
 
   ///`ENREGISTRER VEHICULE`
-  Future<Retour> addVehicule() async {
+  Future<Resultat> addVehicule() async {
     istLoading.value = true;
-    Retour _retour = await provVehicule.postVehicule(
+    Resultat _retour = await provVehicule.postVehicule(
       proprio_id: helper.proprioInfo.value.id ?? 0,
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
       immatriculation: immatTC.text.trim().toUpperCase(),
       categorie_id: categorieID.value,
       marque: marqueTC.text.trim().toUpperCase(),
@@ -147,11 +151,12 @@ class VehiculeController extends GetxController {
   }
 
   ///`METTRE A JOUR VEHICULE`
-  Future<Retour> updateVehicule() async {
+  Future<Resultat> updateVehicule() async {
     istLoading.value = true;
-    Retour _retour = await provVehicule.putVehicule(
-      id: vehicule.value.id!.toInt(),
+    Resultat _retour = await provVehicule.putVehicule(
+      id: vehicule.value.objet!.first.id!.toInt(),
       proprio_id: helper.proprioInfo.value.id!.toInt(),
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
       immatriculation: immatTC.text.trim().toUpperCase(),
       categorie_id: categorieID.value,
       marque: marqueTC.text.trim().toUpperCase(),

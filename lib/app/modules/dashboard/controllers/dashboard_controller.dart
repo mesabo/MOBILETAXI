@@ -31,6 +31,4 @@ class DashboardController extends GetxController {
         date_jour: helper.startdate.value);
     isLoading.value = false;
   }
-
-  
 }

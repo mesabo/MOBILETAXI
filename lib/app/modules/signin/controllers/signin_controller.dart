@@ -32,10 +32,10 @@ class SigninController extends GetxController {
         password: passwordTC.text.trim().toLowerCase());
     isLoading.value = false;
 
-    if (_signin.id! > 0) {
+    if (_signin.objet![0].id! > 0) {
       Get.snackbar("Merci", "Connexion établie avec succès !");
 
-      await LocalStorage().saveUserData(_signin);
+      await LocalStorage().saveUserData(_signin.objet![0]);
       helper.authenticateUser();
 
       phoneTC.text = "";

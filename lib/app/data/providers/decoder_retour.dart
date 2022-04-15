@@ -3,25 +3,23 @@ import 'dart:convert';
 import 'package:fredy_proprio/app/data/models/dashboard_resumer_model.dart';
 import 'package:fredy_proprio/app/data/models/financeresume_model.dart';
 import 'package:fredy_proprio/app/data/models/proprio_model.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/models/resume_model.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_historique_course_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart';
-import 'package:fredy_proprio/app/utils/app_urls.dart';
 
 import '../models/categorie_model.dart';
 import '../models/driver_model.dart';
-import '../models/message_support_model.dart';
 import '../models/objet_message_model.dart';
 import '../models/vehicule_model.dart';
 
-Retour parseRetour(responseBody) {
+Resultat parseResultat(responseBody) {
   print(responseBody);
   final parsed = json.decode(responseBody);
-  return Retour.fromJson(parsed);
+  return Resultat.fromJson(parsed);
 }
 
-List<VehiculeHistoriqueCourse> parseRetourLVHC(responseBody) {
+List<VehiculeHistoriqueCourse> parseResultatLVHC(responseBody) {
   // final parsed = json.decode(responseBody);
   final parsed =
       json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
@@ -59,47 +57,24 @@ Financeresume parsFinanceresume(responseBody) {
   return Financeresume.fromJson(json.decode(responseBody));
 }
 
-// Resume parseResumer(responseBody) {
-//   final parsed =
-//       json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-
-//   return parsed
-//       .map<Financeresume>((json) => Financeresume.fromJson(json))
-//       .toList();
-// }
-
 Proprio parseProprio(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  List<Proprio> res =
-      parsed.map<Proprio>((json) => Proprio.fromJson(json)).toList();
-  print(res);
-  if (res.isNotEmpty) {
-    return res.first;
-  } else {
-    return Proprio(id: 0);
-  }
+  return Proprio.fromJson(json.decode(responseBody));
 }
 
 /// DECODER LES DONNEES
-List<Vehicule> parseVehicules(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed.map<Vehicule>((json) => Vehicule.fromJson(json)).toList();
+Vehicule parseVehicules(responseBody) {
+  return Vehicule.fromJson(json.decode(responseBody));
 }
 
 /// DECODER LES DONNEES
-List<Categorie> parseCategories(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed.map<Categorie>((json) => Categorie.fromJson(json)).toList();
+Categorie parseCategories(responseBody) {
+  final parsed = json.decode(responseBody);
+  return Categorie.fromJson(parsed);
 }
 
 /// DECODER LES DONNEES
-List<Driver> parseDrivers(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed.map<Driver>((json) => Driver.fromJson(json)).toList();
+Driver parseDrivers(responseBody) {
+  return Driver.fromJson(json.decode(responseBody));
 }
 
 /// DECODER LES DONNEES
@@ -116,11 +91,6 @@ List<VehiculeLibre> parseVehiculeLibre(responseBody) {
   return parsed
       .map<VehiculeLibre>((json) => VehiculeLibre.fromJson(json))
       .toList();
-}
-
-MessageSupport parseMessageSupport(responseBody) {
-  final parsed = json.decode(responseBody);
-  return MessageSupport.fromJson(parsed);
 }
 
 List<ObjetMessage> parseObjetMessages(responseBody) {

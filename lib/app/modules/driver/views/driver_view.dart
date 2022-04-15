@@ -33,7 +33,7 @@ class DriverView extends GetView<DriverController> {
                         'Total: ',
                       ),
                       Text(
-                        '${ctlDriver.tempDriverList.length}',
+                        '${ctlDriver.tempDriverList.value.objet!.length}',
                         style: const TextStyle(
                             // color: Colors.blue,
                             fontSize: 22,
@@ -55,12 +55,12 @@ class DriverView extends GetView<DriverController> {
                     controller: ctlDriver.searchTextTC,
                     placeholder: 'Chercher ....',
                     onTap: () {
-                      ctlDriver.tempDriverList.value = ctlDriver.driversList;
+                      ctlDriver.tempDriverList.value =
+                          ctlDriver.driversList.value;
                     },
                     onChanged: (value) {
-                      ctlDriver.tempDriverList.value = ctlDriver
-                          .driversList.reversed
-                          .toList()
+                      ctlDriver.tempDriverList.value.objet = ctlDriver
+                          .driversList.value.objet!
                           .where((p0) =>
                               p0.nom!
                                   .toLowerCase()
@@ -75,7 +75,8 @@ class DriverView extends GetView<DriverController> {
                     },
                     onSuffixTap: () {
                       ctlDriver.searchTextTC.text = "";
-                      ctlDriver.tempDriverList.value = ctlDriver.driversList;
+                      ctlDriver.tempDriverList.value =
+                          ctlDriver.driversList.value;
                     },
                   ),
                 ),
@@ -89,9 +90,9 @@ class DriverView extends GetView<DriverController> {
                     //   childAspectRatio: 3 / 2,
                     // ),
                     delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) =>
-                      DriverItemsView(driver: ctlDriver.tempDriverList[index]),
-                  childCount: ctlDriver.tempDriverList.length,
+                  (BuildContext context, int index) => DriverItemsView(
+                      driver: ctlDriver.tempDriverList.value.objet![index]),
+                  childCount: ctlDriver.tempDriverList.value.objet!.length,
                 )),
               ],
             ),

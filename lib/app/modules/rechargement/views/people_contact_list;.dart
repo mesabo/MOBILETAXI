@@ -20,7 +20,7 @@ class PeopleListPage extends StatefulWidget {
 }
 
 class _PeopleListPageState extends State<PeopleListPage> {
-  List<Driver> _contacts = [];
+  var _contacts = Driver().objet;
   bool _loading = false;
   String? searchTerm;
   String _searchTerm = '';
@@ -42,11 +42,11 @@ class _PeopleListPageState extends State<PeopleListPage> {
         _loading = true;
       });
     }
-    List<Driver> _newList = <Driver>[];
+    List<Objet> _newList = <Objet>[];
     if (_searchTerm.isNotEmpty) {
       _newList = await ctlRechargement.chercherContact(_searchTerm.trim());
     } else {
-      _newList = ctlDriver.driversList;
+      _newList = ctlDriver.driversList.value.objet!;
     }
     setState(() {
       if (showIndicator) {
@@ -101,7 +101,7 @@ class _PeopleListPageState extends State<PeopleListPage> {
                     ),
                   ),
                 ),
-                ..._contacts.map((contact) {
+                ..._contacts!.map((contact) {
                   return SliverToBoxAdapter(
                     child: ListTile(
                         leading: (contact.nom != null &&
@@ -122,7 +122,7 @@ class _PeopleListPageState extends State<PeopleListPage> {
                         subtitle: Text("${contact.telephone}"),
                         trailing: IconButton(
                             onPressed: () {
-                              ctlRechargement.driver.value = Driver(
+                              ctlRechargement.driver.value.objet![0] = Objet(
                                   nom: contact.nom,
                                   prenom: contact.prenom,
                                   telephone: contact.telephone,

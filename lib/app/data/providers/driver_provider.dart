@@ -1,18 +1,15 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:fredy_proprio/app/data/models/driver_model.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
-import 'package:fredy_proprio/app/data/providers/decoder_retour.dart';
 import 'package:fredy_proprio/app/utils/app_urls.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/resume_model.dart';
+import 'decoder_retour.dart';
 
 class DriverProvider {
   /// EXECUTER REQUETE GET
-  Future<List<Driver>> getListerDrivers({required int proprio_id}) async {
+  Future<Driver> getListerDrivers({required int proprio_id}) async {
     var url =
         APPURL.BASE_URL + APPURL.GET_LISTER_DRIVERS + "proprio_id=$proprio_id";
     final response = await http.get(Uri.parse(url));
@@ -43,17 +40,17 @@ class DriverProvider {
   }
 
   /// EXECUTER REQUETE PUT
-  Future<Retour> putAttribuerVehicule(
+  Future<Resultat> putAttribuerVehicule(
       {required int vehicule_id, required int driver_id}) async {
     var url = APPURL.BASE_URL +
         APPURL.PUT_ATTRIBUER_VEHICULE +
         "chauffeur_id=$driver_id&vehicule_id=$vehicule_id";
     final response = await http.put(Uri.parse(url));
-    return parseRetour(response.body);
+    return parseResultat(response.body);
   }
 
   /// EXECUTER REQUETE PUT
-  Future<Retour> putDriver({
+  Future<Resultat> putDriver({
     required int id,
     required int proprio_id,
     required String nom,
@@ -68,11 +65,11 @@ class DriverProvider {
         APPURL.PUT_DRIVER +
         "id=$id&nom=$nom&prenom=$prenom&numero_permis=$numero_permis&telephone=$telephone&proprio_id=$proprio_id&image_permis=$image_permis&numero_autorisation=$numero_autorisation&numero_cert_aptitude=$numero_cert_aptitude";
     final response = await http.put(Uri.parse(url));
-    return parseRetour(response.body);
+    return parseResultat(response.body);
   }
 
   /// EXECUTER REQUETE POST
-  Future<Retour> postDriver({
+  Future<Resultat> postDriver({
     required int proprio_id,
     required String nom,
     required String prenom,
@@ -88,6 +85,6 @@ class DriverProvider {
         "nom=$nom&prenom=$prenom&numero_permis=$numero_permis&telephone=$telephone&proprio_id=$proprio_id&image_permis=$image_permis&numero_autorisation=$numero_autorisation&numero_cert_aptitude=$numero_cert_aptitude";
     final response = await http.post(Uri.parse(url));
 
-    return parseRetour(response.body);
+    return parseResultat(response.body);
   }
 }

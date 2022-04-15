@@ -166,13 +166,14 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
                           fontWeight: FontWeight.w700,
                           color: LightColor.darkgrey),
                     ),
-                    Text("Tél. ${ctlRechargement.driver.value.telephone}",
+                    Text(
+                        "Tél. ${ctlRechargement.driver.value.objet![0].telephone}",
                         style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w700,
                             color: Colors.white)),
                     Text(
-                        "${ctlRechargement.driver.value.nom} ${ctlRechargement.driver.value.prenom}",
+                        "${ctlRechargement.driver.value.objet![0].nom} ${ctlRechargement.driver.value.objet![0].prenom}",
                         style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w700,

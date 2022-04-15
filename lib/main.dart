@@ -46,6 +46,7 @@ void main() async {
 }
 
 /// AUTHENTICATE USER
-authenticate(Proprio proprio) => (proprio.id != null && proprio.id! > 0)
-    ? Get.offAllNamed(Routes.HOME)
-    : Get.offAllNamed(Routes.SIGNIN);
+authenticate(Proprio proprio) =>
+    (proprio.objet![0].id != null && proprio.objet![0].id! > 0)
+        ? Get.offAllNamed(Routes.HOME)
+        : Get.offAllNamed(Routes.SIGNIN);

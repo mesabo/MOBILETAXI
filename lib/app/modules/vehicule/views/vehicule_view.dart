@@ -30,7 +30,7 @@ class VehiculeView extends GetView<VehiculeController> {
                               fontWeight: FontWeight.w100),
                         ),
                         Text(
-                          '${ctlVehicule.tempVehiculeList.length}',
+                          '${ctlVehicule.tempVehiculeList.value.objet!.length}',
                           style: const TextStyle(
                               color: Colors.green,
                               fontSize: 22,
@@ -54,12 +54,11 @@ class VehiculeView extends GetView<VehiculeController> {
                     placeholder: 'Chercher ....',
                     onTap: () {
                       ctlVehicule.tempVehiculeList.value =
-                          ctlVehicule.vehiculesList;
+                          ctlVehicule.vehiculesList.value;
                     },
                     onChanged: (value) {
-                      ctlVehicule.tempVehiculeList.value = ctlVehicule
-                          .vehiculesList.reversed
-                          .toList()
+                      ctlVehicule.tempVehiculeList.value.objet = ctlVehicule
+                          .vehiculesList.value.objet!
                           .where((p0) =>
                               p0.immatriculation!
                                   .toLowerCase()
@@ -81,7 +80,7 @@ class VehiculeView extends GetView<VehiculeController> {
                     onSuffixTap: () {
                       ctlVehicule.searchTextTC.text = "";
                       ctlVehicule.tempVehiculeList.value =
-                          ctlVehicule.vehiculesList;
+                          ctlVehicule.vehiculesList.value;
                     },
                   ),
                 ),
@@ -89,9 +88,9 @@ class VehiculeView extends GetView<VehiculeController> {
                 // Other sliver elements
                 SliverList(
                     delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) =>
-                      VehiculeItemsView(ctlVehicule.tempVehiculeList[index]),
-                  childCount: ctlVehicule.tempVehiculeList.length,
+                  (BuildContext context, int index) => VehiculeItemsView(
+                      ctlVehicule.tempVehiculeList.value.objet![index]),
+                  childCount: ctlVehicule.tempVehiculeList.value.objet!.length,
                 )),
               ],
             ),

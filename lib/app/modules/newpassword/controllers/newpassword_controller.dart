@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
-import 'package:fredy_proprio/app/data/models/proprio_model.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
+import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/providers/providers.dart';
 import 'package:fredy_proprio/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -26,7 +25,7 @@ class NewpasswordController extends GetxController {
 
   Future puNewPasswordFN() async {
     isLoading.value = true;
-    Retour _putnewpass = await provProprio.putNewPassword(
+    Resultat _putnewpass = await provProprio.putNewPassword(
         telephone: ctlOtp.phoneNumber.value.trim().toLowerCase(),
         new_password: passwordTC.text.trim().toLowerCase());
     isLoading.value = false;

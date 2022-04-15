@@ -1,5 +1,10 @@
 {
+    "bSuccess": false,
     "message": "succes",
+    "etat_connexion": true,
+    "totaux": "197167",
+    "espece": "0",
+    "dematerialise": "197167",
     "objet": [
         {
             "duree": 660,
@@ -8,8 +13,5 @@
             "date": "2022-02-17 15:10:53",
             "type_paiement": "espece"
         }
-    ],
-    "totaux": "197167",
-    "espece": "0",
-    "dematerialise": "197167"
+    ]
 }

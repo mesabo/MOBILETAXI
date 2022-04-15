@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
-import 'package:fredy_proprio/app/modules/driver/views/driver_add_view.dart';
 import 'package:fredy_proprio/app/modules/vehicule/views/vehicule_add_view.dart';
 import 'package:fredy_proprio/app/utils/app_images.dart';
 import 'package:get/get.dart';
 
 class VehiculeDetailNestedScrollModal extends StatelessWidget {
-  final Vehicule vehicule;
+  final Objet vehicule;
   VehiculeDetailNestedScrollModal({Key? key, required this.vehicule})
       : super(key: key);
 
@@ -63,7 +62,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                   trailing: IconButton(
                       onPressed: () {
                         Get.back();
-                        ctlVehicule.vehicule.value = vehicule;
+                        ctlVehicule.vehicule.value.objet!.first = vehicule;
                         ctlVehicule.vehiculeDate.value =
                             DateTime.tryParse(vehicule.annee.toString()) ??
                                 DateTime.now();
@@ -105,7 +104,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                             ),
                             const SizedBox(width: 5.0),
                             Text(
-                                "${ctlVehicule.vehiculeResume.value.distanceJour ?? 0} km"),
+                                "${ctlVehicule.vehiculeResume.value.objet!.first.distanceJour ?? 0} km"),
                             Spacer(),
                             Container(
                                 height: 20.0, width: 1.0, color: Colors.grey),
@@ -116,7 +115,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                             ),
                             const SizedBox(width: 5.0),
                             Text(
-                                "${ctlVehicule.vehiculeResume.value.montantJour ?? 0} F"),
+                                "${ctlVehicule.vehiculeResume.value.objet!.first.montantJour ?? 0} F"),
                           ],
                         ),
                       ),
@@ -128,10 +127,11 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(children: [
-                            (ctlVehicule.vehiculeResume.value.driverNom !=
+                            (ctlVehicule.vehiculeResume.value.objet!.first
+                                            .driverNom !=
                                         null ||
-                                    ctlVehicule.vehiculeResume.value
-                                            .driverPrenom !=
+                                    ctlVehicule.vehiculeResume.value.objet!
+                                            .first.driverPrenom !=
                                         null)
                                 ? Column(
                                     crossAxisAlignment:
@@ -139,12 +139,14 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                                     children: <Widget>[
                                       Text("Chauffeur"),
                                       Text(
-                                          "${ctlVehicule.vehiculeResume.value.driverNom} ${ctlVehicule.vehiculeResume.value.driverPrenom}"),
+                                          "${ctlVehicule.vehiculeResume.value.objet!.first.driverNom} ${ctlVehicule.vehiculeResume.value.objet!.first.driverPrenom}"),
                                     ],
                                   )
                                 : const SizedBox(),
                             const Spacer(),
-                            ctlVehicule.vehiculeResume.value.driverNom != null
+                            ctlVehicule.vehiculeResume.value.objet!.first
+                                        .driverNom !=
+                                    null
                                 ? Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -152,7 +154,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: <Widget>[
                                       Text(
-                                          "${ctlVehicule.vehiculeResume.value.driverTelephone}"),
+                                          "${ctlVehicule.vehiculeResume.value.objet!.first.driverTelephone}"),
                                     ],
                                   )
                                 : const SizedBox(),

@@ -1,5 +1,6 @@
 {
-    "id": 1,
-    "telephone": "",
-    "reseau": ""
+    "id": 0,
+    "nom": "nom",
+    "prenom": "prenom",
+    "telephone": "telephone"
 }

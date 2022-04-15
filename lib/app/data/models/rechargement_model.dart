@@ -1,6 +1,7 @@
 class Rechargement {
   bool? bSuccess;
   String? message;
+  bool? etatConnexion;
   int? proprioId;
   int? solde;
   List<Operation>? operation;
@@ -8,6 +9,7 @@ class Rechargement {
   Rechargement(
       {this.bSuccess,
       this.message,
+      this.etatConnexion,
       this.proprioId,
       this.solde,
       this.operation});
@@ -15,6 +17,7 @@ class Rechargement {
   Rechargement.fromJson(Map<String, dynamic> json) {
     bSuccess = json['bSuccess'];
     message = json['message'];
+    etatConnexion = json['etat_connexion'];
     proprioId = json['proprio_id'];
     solde = json['solde'];
     if (json['operation'] != null) {
@@ -29,6 +32,7 @@ class Rechargement {
     final data = <String, dynamic>{};
     data['bSuccess'] = bSuccess;
     data['message'] = message;
+    data['etat_connexion'] = etatConnexion;
     data['proprio_id'] = proprioId;
     data['solde'] = solde;
     if (operation != null) {

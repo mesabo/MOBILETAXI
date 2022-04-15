@@ -1,4 +1,12 @@
+
 {
-    "id": 1,
-    "libelle": "Suggestion"
+    "bSuccess": true,
+    "message": "succes",
+    "etat_connexion": true,
+    "objet": [
+        {
+            "id": 1,
+            "libelle": "Suggestion"
+        }
+    ]
 }

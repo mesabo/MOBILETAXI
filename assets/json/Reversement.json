@@ -1,5 +1,6 @@
 {
     "bSuccess": true,
     "message": "succes",
+    "etat_connexion": true,
     "versement_url": "www.google.com"
 }

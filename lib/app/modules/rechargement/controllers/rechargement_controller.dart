@@ -60,23 +60,25 @@ class RechargementController extends GetxController {
 
   Future chercherContact(String value) async {
     return ctlDriver.driversList
-        .where((p0) =>
-            p0.telephone
-                .toString()
-                .trim()
-                .toLowerCase()
-                .contains(value.toString().trim().toLowerCase()) ||
-            p0.nom
-                .toString()
-                .trim()
-                .toLowerCase()
-                .contains(value.toString().trim().toLowerCase()) ||
-            p0.prenom
-                .toString()
-                .trim()
-                .toLowerCase()
-                .contains(value.toString().trim().toLowerCase()))
-        .toList();
+      ..value
+          .objet!
+          .where((p0) =>
+              p0.telephone
+                  .toString()
+                  .trim()
+                  .toLowerCase()
+                  .contains(value.toString().trim().toLowerCase()) ||
+              p0.nom
+                  .toString()
+                  .trim()
+                  .toLowerCase()
+                  .contains(value.toString().trim().toLowerCase()) ||
+              p0.prenom
+                  .toString()
+                  .trim()
+                  .toLowerCase()
+                  .contains(value.toString().trim().toLowerCase()))
+          .toList();
   }
 
   Future<Rechargement> listerHistoriqueRecharges() async {
@@ -92,8 +94,8 @@ class RechargementController extends GetxController {
     isOperationLoading.value = true;
     var _res = proRechargement.getLienRechargement(
         proprio_id: helper.proprioInfo.value.id ?? 0,
-        driver_id: driver.value.id ?? 0,
-        driver_contact: driver.value.telephone ?? '',
+        driver_id: driver.value.objet![0].id ?? 0,
+        driver_contact: driver.value.objet![0].telephone ?? '',
         montant: montant);
     isOperationLoading.value = false;
     return _res;

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../models/proprio_model.dart';
+import '../models/proprio_model.dart' as proprio;
 
 class LocalStorage extends GetxController {
   final box = GetStorage();
@@ -9,13 +9,13 @@ class LocalStorage extends GetxController {
 
   ///`READ USER DATA FROM LOCAL STORAGE AND RETURN`
   ///`IF NOT EMPTY ELSE CLEAR USER`
-  Future<Proprio> readUserData() async {
-    var currentUser = Proprio();
+  Future<proprio.Objet> readUserData() async {
+    var currentUser = proprio.Objet();
     if (box.read("proprio_user_data") != null) {
-       print("READING CURRENT USER....}");
+      print("READING CURRENT USER....}");
       final data = box.read("proprio_user_data") as Map<String, dynamic>;
 
-      currentUser = Proprio(
+      currentUser = proprio.Objet(
         id: data['id'] ?? 0,
         nom: data['nom'] ?? '',
         prenom: data['prenom'] ?? '',
@@ -23,28 +23,30 @@ class LocalStorage extends GetxController {
         email: data['email'] ?? '',
         password: data['password'] ?? '',
         status: data['status'] ?? '',
-        // urlien: data['urlien'] ?? '',
+        idUser: data['id_user'] ?? 0,
+        cleConnexion: data['cle_connexion'] ?? '',
       );
     } else {
-      currentUser = Proprio(id: null);
+      currentUser = proprio.Objet(id: null);
     }
     print("CURRENT USER: ${currentUser.toJson()}");
     return currentUser;
   }
 
   ///`SAVE USER DATA INTO LOCAL STORAGE`
-  Future saveUserData(Proprio model) async {
+  Future saveUserData(proprio.Objet model) async {
     box.write(
       "proprio_user_data",
       {
         "id": model.id,
-        "nom": model.nom ,
-        "prenom": model.prenom ,
-        "telephone": model.telephone ,
-        "password": model.password ,
+        "nom": model.nom,
+        "prenom": model.prenom,
+        "telephone": model.telephone,
+        "password": model.password,
         "email": model.email,
         "status": model.status,
-        // "urlien": model.urlien ?? 0,
+        "id_user": model.idUser ?? 0,
+        "cle_connexion": model.cleConnexion ?? '',
       },
     );
     await readUserData();
@@ -62,7 +64,8 @@ class LocalStorage extends GetxController {
         "password": '',
         "email": '',
         "status": 0,
-        // "urlien": model.urlien ?? 0,
+        "id_user": 0,
+        "cle_connexion": '',
       },
     );
     await readUserData();

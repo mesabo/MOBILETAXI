@@ -1,4 +1,36 @@
 class VehiculeResume {
+  bool? bSuccess;
+  String? message;
+  bool? etatConnexion;
+  List<Objet>? objet;
+
+  VehiculeResume({this.bSuccess, this.message, this.etatConnexion, this.objet});
+
+  VehiculeResume.fromJson(Map<String, dynamic> json) {
+    bSuccess = json['bSuccess'];
+    message = json['message'];
+    etatConnexion = json['etat_connexion'];
+    if (json['objet'] != null) {
+      objet = <Objet>[];
+      json['objet'].forEach((v) {
+        objet?.add(Objet.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['bSuccess'] = bSuccess;
+    data['message'] = message;
+    data['etat_connexion'] = etatConnexion;
+    if (objet != null) {
+      data['objet'] = objet?.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Objet {
   int? id;
   String? immatriculation;
   String? marque;
@@ -15,7 +47,7 @@ class VehiculeResume {
   int? dureeJour;
   String? montantJour;
 
-  VehiculeResume(
+  Objet(
       {this.id,
       this.immatriculation,
       this.marque,
@@ -32,7 +64,7 @@ class VehiculeResume {
       this.dureeJour,
       this.montantJour});
 
-  VehiculeResume.fromJson(Map<String, dynamic> json) {
+  Objet.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     immatriculation = json['immatriculation'];
     marque = json['marque'];

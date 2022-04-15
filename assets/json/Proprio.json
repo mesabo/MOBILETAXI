@@ -1,10 +1,19 @@
 {
-    "id": 17,
-    "nom": "cisse",
-    "prenom": "yaya",
-    "email": "0787586222",
-    "telephone": "0787586222",
-    "password": "0787586222",
-    "status": 1,
-    "urlien": "0787586222"
+    "bSuccess": true,
+    "message": "succes",
+    "etat_connexion": true,
+    "objet": [
+        {
+            "id": 17,
+            "nom": "cisse",
+            "prenom": "yaya",
+            "email": "0787586222",
+            "telephone": "0787586222",
+            "password": "0787586222",
+            "status": 1,
+            "urlien": "0787586222",
+            "id_user": 51,
+            "cle_connexion": "f808c176-bcc5-11ec-912b-b47af12f6e90"
+        }
+    ]
 }

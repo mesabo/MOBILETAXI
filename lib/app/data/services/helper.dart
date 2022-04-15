@@ -1,10 +1,10 @@
-import 'package:fredy_proprio/app/data/models/proprio_model.dart';
+import 'package:fredy_proprio/app/data/models/proprio_model.dart' as proprio;
 import 'package:get/get.dart';
 
 import 'local_storage.dart';
 
 class Helper extends GetxController {
-  final Rx<Proprio> proprioInfo = Proprio().obs;
+  final Rx<proprio.Objet> proprioInfo = proprio.Objet().obs;
   RxBool connected = false.obs;
   RxBool blocked = false.obs;
   RxString defaultLanguage = "".obs;

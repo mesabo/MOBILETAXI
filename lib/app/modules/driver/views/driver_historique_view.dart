@@ -69,9 +69,9 @@ class DriverHistoriqueView extends GetView {
                                     .toList()
                                 : ctlDriver.historiqueDriverList,
                         xValueMapper: (Resume sales, _) =>
-                            DateTime.parse(sales.date.toString()),
+                            DateTime.parse(sales.objet![0].date.toString()),
                         yValueMapper: (Resume sales, _) =>
-                            int.parse(sales.montant.toString()),
+                            int.parse(sales.objet![0].montant.toString()),
                         enableTooltip: true,
                         name: 'montant',
                         yAxisName: 'Montants',
@@ -90,9 +90,9 @@ class DriverHistoriqueView extends GetView {
                             ? ctlDriver.historiqueDriverList.take(12).toList()
                             : ctlDriver.historiqueDriverList,
                         xValueMapper: (Resume sales, _) =>
-                            DateTime.parse(sales.date.toString()),
+                            DateTime.parse(sales.objet![0].date.toString()),
                         yValueMapper: (Resume sales, _) =>
-                            int.parse(sales.duree.toString()),
+                            int.parse(sales.objet![0].duree.toString()),
                         name: 'duree',
                       ),
                     ],

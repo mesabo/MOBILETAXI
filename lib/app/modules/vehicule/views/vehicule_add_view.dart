@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
-import 'package:fredy_proprio/app/data/models/retour_model.dart';
 import 'package:fredy_proprio/app/themes/colors/app_colors.dart';
-import 'package:fredy_proprio/app/utils/app_images.dart';
 import 'package:fredy_proprio/app/utils/app_styles.dart';
 import 'package:fredy_proprio/app/utils/modals/modal_with_nested_scroll.dart';
 
 import 'package:get/get.dart';
-import 'package:image_picker_type/image_picker_type.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sizer/sizer.dart';
 
 import 'dates_picker.dart';
 
@@ -98,7 +94,8 @@ class VehiculeAddView extends GetView {
                     //TODO
                     if (ctlVehicule.categorieTC.text.isEmpty) {
                       ctlVehicule.categorieTC.text =
-                          ctlVehicule.categoriesList[10].libelle ?? "";
+                          ctlVehicule.categoriesList.value.objet![0].libelle ??
+                              "";
                     }
                     if (_formKey.currentState!.validate()) {
                       ctlVehicule.isEditing.value
@@ -124,16 +121,21 @@ class VehiculeAddView extends GetView {
         context: ctx,
         builder: (_) => CupertinoActionSheet(
               actions: [
-                for (var i = 0; i < ctlVehicule.categoriesList.length; i++)
+                for (var i = 0;
+                    i < ctlVehicule.categoriesList.value.objet!.length;
+                    i++)
                   CupertinoActionSheetAction(
                       onPressed: () {
                         ctlVehicule.categorieID.value =
-                            ctlVehicule.categoriesList[i].id ?? 1;
-                        ctlVehicule.categorieTC.text =
-                            ctlVehicule.categoriesList[i].libelle ?? "ECO";
+                            ctlVehicule.categoriesList.value.objet![i].id ?? 1;
+                        ctlVehicule.categorieTC.text = ctlVehicule
+                                .categoriesList.value.objet![i].libelle ??
+                            "ECO";
                         Get.back();
                       },
-                      child: Text(ctlVehicule.categoriesList[i].libelle ?? '')),
+                      child: Text(
+                          ctlVehicule.categoriesList.value.objet![i].libelle ??
+                              '')),
               ],
               cancelButton: CupertinoActionSheetAction(
                 onPressed: () {
@@ -294,7 +296,7 @@ class VehiculeAddView extends GetView {
           readOnly: true,
           decoration: InputDecoration(
               labelText: "Année",
-              hintText: ctlVehicule.vehicule.value.annee ?? "",
+              hintText: ctlVehicule.vehicule.value.objet!.first.annee ?? "",
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.normal,
               ),

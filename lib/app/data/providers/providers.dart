@@ -2,7 +2,6 @@ import 'package:fredy_proprio/app/data/providers/export_providers.dart';
 
 DashboardProvider provDashboard = DashboardProvider();
 DriverProvider provDriver = DriverProvider();
-MessageSupportProvider provObjectMsg = MessageSupportProvider();
 Categorieprovider provCategorie = Categorieprovider();
 ResumeProvider provResume = ResumeProvider();
 VehiculeProvider provVehicule = VehiculeProvider();
