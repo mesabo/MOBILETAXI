@@ -21,7 +21,7 @@ class VehiculeProvider {
   }
 
   /// EXECUTER REQUETE GET
-  Future<List<VehiculeResume>> getVehiculeResume({
+  Future<VehiculeResume> getVehiculeResume({
     required int proprio_id,
     required String cle_connexion,
     required int vehicule_id,

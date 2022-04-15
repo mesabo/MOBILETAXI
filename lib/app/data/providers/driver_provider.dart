@@ -1,6 +1,6 @@
 import 'package:fredy_proprio/app/data/models/driver_model.dart';
 import 'package:fredy_proprio/app/data/models/resultat_model.dart';
-import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
+import 'package:fredy_proprio/app/data/models/vehicule_model.dart' as vehicule;
 import 'package:fredy_proprio/app/utils/app_urls.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,7 +31,7 @@ class DriverProvider {
   }
 
   /// EXECUTER REQUETE GET
-  Future<List<VehiculeLibre>> getListerVehiculeLibre(
+  Future<vehicule.Vehicule> getListerVehiculeLibre(
       {required proprio_id}) async {
     var url =
         APPURL.BASE_URL + APPURL.GET_VEHICULE_LIBRE + "proprio_id=$proprio_id";

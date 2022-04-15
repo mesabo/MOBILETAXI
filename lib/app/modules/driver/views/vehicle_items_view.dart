@@ -7,7 +7,7 @@ import 'package:fredy_proprio/app/utils/app_styles.dart';
 import 'package:get/get.dart';
 
 class VehicleItemsView extends GetView {
-  final VehiculeLibre vLibre;
+  final Objet vLibre;
   const VehicleItemsView(this.vLibre, {Key? key}) : super(key: key);
 
   @override

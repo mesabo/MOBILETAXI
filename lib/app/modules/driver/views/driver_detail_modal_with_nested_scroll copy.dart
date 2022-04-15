@@ -69,31 +69,23 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                               ctlDriver.isEditing.value = true;
-                              ctlDriver.driver.value.objet![0] = driver;
+                              ctlDriver.driver.value = driver;
 
                               ctlDriver.nomTC.text = driver.nom ?? '';
                               ctlDriver.prenomTC.text = driver.prenom ?? '';
                               ctlDriver.permisTC.text =
                                   driver.numeroPermis ?? '';
                               ctlDriver.vehiculeTC.text = ctlDriver
-                                      .vehiculeResume
-                                      .value
-                                      .objet!
-                                      .first
-                                      .immatriculation ??
+                                      .vehiculeResume.value.immatriculation ??
                                   '';
 
-                              ctlDriver.vehicleSelected.value!.first = Objet(
-                                id: ctlDriver
-                                    .vehiculeResume.value.objet!.first.id,
-                                immatriculation: ctlDriver.vehiculeResume.value
-                                    .objet!.first.immatriculation,
-                                annee: ctlDriver
-                                    .vehiculeResume.value.objet!.first.annee,
-                                marque: ctlDriver
-                                    .vehiculeResume.value.objet!.first.marque,
-                                modele: ctlDriver
-                                    .vehiculeResume.value.objet!.first.modele,
+                              ctlDriver.vehicleSelected.value = Objet(
+                                id: ctlDriver.vehiculeResume.value.id,
+                                immatriculation: ctlDriver
+                                    .vehiculeResume.value.immatriculation,
+                                annee: ctlDriver.vehiculeResume.value.annee,
+                                marque: ctlDriver.vehiculeResume.value.marque,
+                                modele: ctlDriver.vehiculeResume.value.modele,
                               );
 
                               ctlDriver.nomTC.text = driver.nom ?? '';
@@ -142,7 +134,7 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5.0),
                                   Text(
-                                      "${ctlDriver.vehiculeResume.value.objet!.first.distanceJour ?? 0} km"),
+                                      "${ctlDriver.vehiculeResume.value.distanceJour ?? 0} km"),
                                   const Spacer(),
                                   Container(
                                       height: 20.0,
@@ -155,7 +147,7 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5.0),
                                   Text(
-                                      "${ctlDriver.vehiculeResume.value.objet!.first.montantJour ?? 0} F"),
+                                      "${ctlDriver.vehiculeResume.value.montantJour ?? 0} F"),
                                   const Spacer(),
                                 ],
                               ),
@@ -220,8 +212,7 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                             CupertinoIcons.list_number),
                                         onPressed: () {
                                           Get.back();
-                                          ctlDriver.driver.value.objet![0] =
-                                              driver;
+                                          ctlDriver.driver.value = driver;
                                           Get.to(DriverHistoriqueView());
                                         })
                                   ]),

@@ -33,7 +33,7 @@ class DriverView extends GetView<DriverController> {
                         'Total: ',
                       ),
                       Text(
-                        '${ctlDriver.tempDriverList.value.objet!.length}',
+                        '${ctlDriver.tempDriverList.length}',
                         style: const TextStyle(
                             // color: Colors.blue,
                             fontSize: 22,
@@ -59,8 +59,7 @@ class DriverView extends GetView<DriverController> {
                           ctlDriver.driversList.value;
                     },
                     onChanged: (value) {
-                      ctlDriver.tempDriverList.value.objet = ctlDriver
-                          .driversList.value.objet!
+                      ctlDriver.tempDriverList.value = ctlDriver.driversList
                           .where((p0) =>
                               p0.nom!
                                   .toLowerCase()
@@ -90,9 +89,9 @@ class DriverView extends GetView<DriverController> {
                     //   childAspectRatio: 3 / 2,
                     // ),
                     delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) => DriverItemsView(
-                      driver: ctlDriver.tempDriverList.value.objet![index]),
-                  childCount: ctlDriver.tempDriverList.value.objet!.length,
+                  (BuildContext context, int index) =>
+                      DriverItemsView(driver: ctlDriver.tempDriverList[index]),
+                  childCount: ctlDriver.tempDriverList.length,
                 )),
               ],
             ),

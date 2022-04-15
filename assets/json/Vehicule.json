@@ -4,34 +4,23 @@
     "etat_connexion": true,
     "objet": [
         {
-            "id": 1,
-            "immatriculation": "112233AZE",
-            "marque": "PEUGEO",
-            "modele": "PEUGEO",
-            "couleur": "Rouge",
-            "annee": "2012",
-            "categorie": "ORDINAIRE",
+            "id": 75,
+            "immatriculation": "2022CI01",
+            "categorie_id": 1,
+            "proprietaire_id": 108,
+            "ifnull(chauffeur_id,0)": 0,
+            "marque": "NOTA",
+            "modele": "TANO",
+            "couleur": "BLEUE",
+            "annee": "2022",
             "numero_assurance": false,
             "numero_vignette": false,
             "numero_carte_transport": "numero_carte_transport",
-            "status": 0,
-            "VehiculeLibre": {
-                "id": 46,
-                "immatriculation": "TEST",
-                "categorie_id": 2,
-                "proprietaire_id": 2,
-                "chauffeur_id": null,
-                "marque": "TEST",
-                "modele": "TEST",
-                "couleur": "TEST",
-                "annee": "TEST",
-                "gps_longitude": null,
-                "gps_latitude": null,
-                "created_at": null,
-                "updated_at": null,
-                "statut": 1,
-                "etat": 0
-            }
+            "gps_longitude": 0,
+            "gps_latitude": 0,
+            "created_at": "2022-04-12 13:10:41",
+            "statut": 1,
+            "etat": 0
         }
     ]
 }

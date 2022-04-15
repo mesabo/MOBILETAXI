@@ -61,7 +61,6 @@ class RechargementController extends GetxController {
   Future chercherContact(String value) async {
     return ctlDriver.driversList
       ..value
-          .objet!
           .where((p0) =>
               p0.telephone
                   .toString()

@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
-import 'package:fredy_proprio/app/data/models/driver_model.dart';
-import 'package:fredy_proprio/app/data/models/resultat_model.dart';
-import 'package:fredy_proprio/app/data/models/resume_model.dart';
-import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
-import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart';
+import 'package:fredy_proprio/app/data/models/driver_model.dart' as dri;
+import 'package:fredy_proprio/app/data/models/resultat_model.dart' as result;
+import 'package:fredy_proprio/app/data/models/resume_model.dart' as resu;
+import 'package:fredy_proprio/app/data/models/vehicule_model.dart' as veh;
+import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart' as vr;
 import 'package:fredy_proprio/app/data/providers/providers.dart';
 import 'package:get/get.dart';
 
@@ -35,16 +35,16 @@ class DriverController extends GetxController {
   RxBool istLoading = false.obs;
   RxBool isFetching = false.obs;
 
-  final vehicleSelected = Vehicule().objet.obs;
+  final vehicleSelected = veh.Objet().obs;
 
-  final vehiclelibre = VehiculeLibre().obs;
+  final vehiclelibre = veh.Objet().obs;
 
-  Rx<Driver> driver = Driver().obs;
-  Rx<Driver> driversList = Driver().obs;
-  Rx<Driver> tempDriverList = Driver().obs;
-  RxList<VehiculeLibre> vehiculelibreList = <VehiculeLibre>[].obs;
-  RxList<VehiculeLibre> tempVehiculelibreList = <VehiculeLibre>[].obs;
-  Rx<VehiculeResume> vehiculeResume = VehiculeResume().obs;
+  final driver = dri.Objet().obs;
+  final driversList = <dri.Objet>[].obs;
+  final tempDriverList = <dri.Objet>[].obs;
+  final vehiculelibreList = <veh.Objet>[].obs;
+  final tempVehiculelibreList = <veh.Objet>[].obs;
+  Rx<vr.Objet> vehiculeResume = vr.Objet().obs;
 
   late FocusNode myFocusNode;
   var tooltipBehavior;
@@ -53,7 +53,7 @@ class DriverController extends GetxController {
   final isready = false.obs;
 
   final RxBool isLoading = false.obs;
-  RxList<Resume> historiqueDriverList = <Resume>[].obs;
+  RxList<resu.Resume> historiqueDriverList = <resu.Resume>[].obs;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endedDate = DateTime.now().obs;
   RxString dateJour = DateTime.now().toString().substring(0, 10).obs;
@@ -83,7 +83,7 @@ class DriverController extends GetxController {
   }
 
   ///`RESUME VEHICULE`
-  Future<VehiculeResume> getVehiculeResume(vehicule_id) async {
+  Future<vr.Objet> getVehiculeResume(vehicule_id) async {
     String _jour = DateTime.now().toString().substring(0, 10);
     istLoading.value = true;
     var _res = await provVehicule.getVehiculeResume(
@@ -91,29 +91,30 @@ class DriverController extends GetxController {
         cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         vehicule_id: vehicule_id ?? 0,
         date_jour: _jour);
-    if (_res.isNotEmpty) {
-      vehiculeResume.value = _res.first;
+    if (_res.objet!.isNotEmpty) {
+      vehiculeResume.value = _res.objet!.first;
     }
     istLoading.value = false;
-    printInfo(info: vehiculeResume.value.objet.toString());
+    printInfo(info: vehiculeResume.value.toString());
     return vehiculeResume.value;
   }
 
   ///`VEHICULES LIBRES`
-  Future<List<VehiculeLibre>> getVehiculeLibre() async {
+  Future<List<veh.Objet>> getVehiculeLibre() async {
     istLoading.value = true;
-    vehiculelibreList.value = await provDriver.getListerVehiculeLibre(
+    var _res = await provDriver.getListerVehiculeLibre(
         proprio_id: helper.proprioInfo.value.id ?? 0);
-    tempVehiculelibreList.value = vehiculelibreList.reversed.toList();
+    vehiculelibreList.value = _res.objet!;
+    tempVehiculelibreList.value = vehiculelibreList.value;
     istLoading.value = false;
     return vehiculelibreList.value;
   }
 
   ///`AJOUTER VEHICULE`
-  Future<Resultat> postDriver() async {
+  Future<result.Resultat> postDriver() async {
     String _jour = DateTime.now().toString().substring(0, 10);
     istLoading.value = true;
-    Resultat _res = await provDriver.postDriver(
+    result.Resultat _res = await provDriver.postDriver(
       proprio_id: helper.proprioInfo.value.id ?? 0,
       nom: nomTC.text.trim().toUpperCase(),
       prenom: prenomTC.text.trim().toUpperCase(),
@@ -131,11 +132,11 @@ class DriverController extends GetxController {
   }
 
   ///`UPDATE VEHICULE`
-  Future<Resultat> putDriver() async {
+  Future<result.Resultat> putDriver() async {
     String _jour = DateTime.now().toString().substring(0, 10);
     istLoading.value = true;
-    Resultat _res = await provDriver.putDriver(
-      id: driver.value.objet![0].id ?? 0,
+    result.Resultat _res = await provDriver.putDriver(
+      id: driver.value.id ?? 0,
       proprio_id: helper.proprioInfo.value.id ?? 0,
       nom: nomTC.text.trim().toUpperCase(),
       prenom: prenomTC.text.trim().toUpperCase(),
@@ -152,11 +153,10 @@ class DriverController extends GetxController {
   }
 
   ///`ATTRIBUER VEHICULE`
-  Future<Resultat> attribuerVehicule() async {
+  Future<result.Resultat> attribuerVehicule() async {
     istLoading.value = true;
-    Resultat _res = await provDriver.putAttribuerVehicule(
-        vehicule_id: vehicleSelected.value![0].id ?? 0,
-        driver_id: driverID.value);
+    result.Resultat _res = await provDriver.putAttribuerVehicule(
+        vehicule_id: vehicleSelected.value.id ?? 0, driver_id: driverID.value);
     ctlVehicule.listerVehicules();
     ctlDriver.ListerDrivers();
     istLoading.value = false;
@@ -166,20 +166,21 @@ class DriverController extends GetxController {
   ///`LISTER CATEGORIES`
   Future ListerDrivers() async {
     istLoading.value = true;
-    driversList.value = await provDriver.getListerDrivers(
+    var _res = await provDriver.getListerDrivers(
         proprio_id: helper.proprioInfo.value.id ?? 0);
-    driversList.value.objet = driversList.value.objet!.reversed.toList();
+    driversList.value = _res.objet!;
+    driversList.value = driversList.reversed.toList();
     tempDriverList.value = driversList.value;
     istLoading.value = false;
     return driversList;
   }
 
   ///`LISTER HISTORIQUE`
-  Future<List<Resume>> getHistorique() async {
+  Future<List<resu.Resume>> getHistorique() async {
     isLoading.value = true;
     historiqueDriverList.value = await provDriver.getListerHistoriqueDrivers(
         proprio_id: helper.proprioInfo.value.id!.toInt(),
-        driver_id: driver.value.objet![0].id!.toInt(),
+        driver_id: driver.value.id!.toInt(),
         date_debut: startDate.value.toString().substring(0, 10),
         date_fin: endedDate.value.toString().substring(0, 10));
     isLoading.value = false;

@@ -7,6 +7,7 @@ import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/models/resume_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_historique_course_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart';
+import 'package:fredy_proprio/app/data/models/vehicule_model.dart' as vehicule;
 
 import '../models/categorie_model.dart';
 import '../models/driver_model.dart';
@@ -30,7 +31,7 @@ List<VehiculeHistoriqueCourse> parseResultatLVHC(responseBody) {
   // return VehiculeHistoriqueCourse.fromJson(parsed);
 }
 
-List<VehiculeResume> parseVehiculeresume(responseBody) {
+VehiculeResume parseVehiculeresume(responseBody) {
   final parsed =
       json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
   return parsed
@@ -40,17 +41,7 @@ List<VehiculeResume> parseVehiculeresume(responseBody) {
 
 /// DECODER LES DONNEES
 DashboardResumer parseDashboardResumer(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  List<DashboardResumer> res = parsed
-      .map<DashboardResumer>((json) => DashboardResumer.fromJson(json))
-      .toList();
-
-  if (res.isNotEmpty) {
-    return res.first;
-  } else {
-    return DashboardResumer();
-  }
+  return DashboardResumer.fromJson(json.decode(responseBody));
 }
 
 Financeresume parsFinanceresume(responseBody) {
@@ -81,16 +72,12 @@ Driver parseDrivers(responseBody) {
 List<Resume> parseHistoriqueDrivers(responseBody) {
   final parsed =
       json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed.map<Resume>((json) => Resume.fromJson(json)).toList();
+  return parsed.map<ObjetMessage>((json) => Resume.fromJson(json)).toList();
 }
 
 /// DECODER LES DONNEES
-List<VehiculeLibre> parseVehiculeLibre(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed
-      .map<VehiculeLibre>((json) => VehiculeLibre.fromJson(json))
-      .toList();
+Vehicule parseVehiculeLibre(responseBody) {
+  return Vehicule.fromJson(json.decode(responseBody));
 }
 
 List<ObjetMessage> parseObjetMessages(responseBody) {

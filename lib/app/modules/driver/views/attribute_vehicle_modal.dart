@@ -22,9 +22,8 @@ class AttribuerVehiculeModal extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: IconButton(
                         onPressed: () {
-                          if (ctlDriver.vehicleSelected.value!.first.id !=
-                                  null &&
-                              ctlDriver.vehicleSelected.value!.first.id! > 0 &&
+                          if (ctlDriver.vehicleSelected.value.id != null &&
+                              ctlDriver.vehicleSelected.value.id! > 0 &&
                               ctlDriver.driverID.value > 0) {
                             ctlDriver.isLoading.value
                                 ? myAwaitingDialog(context: context)
@@ -78,14 +77,14 @@ class AttribuerVehiculeModal extends StatelessWidget {
                   ),
                   largeTitle: (ctlDriver.vehicleSelected.value !=
                               Vehicule().objet &&
-                          ctlDriver.vehicleSelected.value!.first.id != null &&
-                          ctlDriver.vehicleSelected.value!.first.id! > 0)
+                          ctlDriver.vehicleSelected.value.id != null &&
+                          ctlDriver.vehicleSelected.value.id! > 0)
                       ? Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: Card(
                               child: Chip(
                                   label: Text(
-                                      "VEHICULE.  ${ctlDriver.vehicleSelected.value!.first.immatriculation}"
+                                      "VEHICULE.  ${ctlDriver.vehicleSelected.value.immatriculation}"
                                           .toUpperCase()))))
                       : const SizedBox(),
                 )),
@@ -102,7 +101,7 @@ class AttribuerVehiculeModal extends StatelessWidget {
                         elevation: 0.5,
                         // color: Colors.white,
                         clipBehavior: Clip.antiAlias,
-                        shape: ctlDriver.vehicleSelected.value!.first.id ==
+                        shape: ctlDriver.vehicleSelected.value.id ==
                                 ctlDriver.tempVehiculelibreList[index].id
                             ? RoundedRectangleBorder(
                                 side: const BorderSide(
@@ -139,7 +138,7 @@ class AttribuerVehiculeModal extends StatelessWidget {
                                             Text(
                                                 "IM. ${ctlDriver.tempVehiculelibreList[index].immatriculation}",
                                                 style: ctlDriver.vehicleSelected
-                                                            .value!.first.id ==
+                                                            .value.id ==
                                                         ctlDriver
                                                             .tempVehiculelibreList[
                                                                 index]
@@ -148,8 +147,8 @@ class AttribuerVehiculeModal extends StatelessWidget {
                                                     : priceTextStyle0)
                                           ])),
                                       IconButton(
-                                        icon: ctlDriver.vehicleSelected.value!
-                                                    .first.id ==
+                                        icon: ctlDriver
+                                                    .vehicleSelected.value.id ==
                                                 ctlDriver
                                                     .tempVehiculelibreList[
                                                         index]
@@ -162,8 +161,8 @@ class AttribuerVehiculeModal extends StatelessWidget {
                                             : const Icon(CupertinoIcons
                                                 .check_mark_circled),
                                         onPressed: () {
-                                          ctlDriver.vehicleSelected.value!
-                                              .first = Objet(
+                                          ctlDriver.vehicleSelected.value =
+                                              Objet(
                                             id: ctlDriver
                                                 .tempVehiculelibreList[index]
                                                 .id,

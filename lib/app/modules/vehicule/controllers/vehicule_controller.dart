@@ -93,8 +93,8 @@ class VehiculeController extends GetxController {
         cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         vehicule_id: vehicule_id ?? 0,
         date_jour: _jour);
-    if (_res.isNotEmpty) {
-      vehiculeResume.value = _res.first;
+    if (_res.objet!.isNotEmpty) {
+      vehiculeResume.value = _res;
     }
     istLoading.value = false;
     return vehiculeResume.value;

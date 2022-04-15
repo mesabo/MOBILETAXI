@@ -5,7 +5,7 @@ import 'package:fredy_proprio/app/data/providers/providers.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
-  Rx<DashboardResumer> dashboardResume = DashboardResumer().obs;
+  Rx<Objet> dashboardResume = Objet().obs;
   final RxBool isLoading = false.obs;
   TextEditingController montantTC = TextEditingController();
 
@@ -26,9 +26,15 @@ class DashboardController extends GetxController {
 
   Future loadDashboardresume() async {
     isLoading.value = true;
-    dashboardResume.value = await provDashboard.getListerDashboardResumers(
+    var _res = await provDashboard.getListerDashboardResumers(
         proprio_id: helper.proprioInfo.value.id ?? 0,
         date_jour: helper.startdate.value);
+    if (_res.objet != null && _res.objet!.isNotEmpty) {
+      dashboardResume.value = _res.objet!.first;
+    } else {
+      dashboardResume.value = Objet();
+    }
+
     isLoading.value = false;
   }
 }

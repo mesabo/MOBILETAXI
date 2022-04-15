@@ -49,7 +49,7 @@ class DashboardView extends GetView<DashboardController> {
                 child: OutlinedButton(
                     onPressed: () {
                       ctlDashboard.montantTC.text = ctlDashboard
-                          .dashboardResume.value.objet![0].areverser
+                          .dashboardResume.value.areverser
                           .toString();
                       reverserMontantDialog(context);
                     },
@@ -104,7 +104,7 @@ class DashboardView extends GetView<DashboardController> {
                         icon: Icons.monetization_on,
                         title: "Montant à percevoir",
                         data:
-                            "${ctlDashboard.dashboardResume.value.objet![0].apercevoir ?? 0} F")),
+                            "${ctlDashboard.dashboardResume.value.apercevoir ?? 0} F")),
                 const SizedBox(width: 16.0),
                 Expanded(
                     child: _buildTile(
@@ -112,7 +112,7 @@ class DashboardView extends GetView<DashboardController> {
                         icon: Icons.done_all,
                         title: "Montant à reverser",
                         data:
-                            "${ctlDashboard.dashboardResume.value.objet![0].areverser ?? 0} F"))
+                            "${ctlDashboard.dashboardResume.value.areverser ?? 0} F"))
               ],
             ),
           ),
@@ -127,7 +127,7 @@ class DashboardView extends GetView<DashboardController> {
                     icon: Icons.group,
                     title: "Chauffeurs",
                     data:
-                        "${ctlDashboard.dashboardResume.value.objet![0].nombreDriver ?? 0}",
+                        "${ctlDashboard.dashboardResume.value.nombreDriver ?? 0}",
                   ),
                 ),
                 const SizedBox(width: 16.0),
@@ -137,7 +137,7 @@ class DashboardView extends GetView<DashboardController> {
                     icon: Icons.drive_eta_rounded,
                     title: "Véhicules",
                     data:
-                        "${ctlDashboard.dashboardResume.value.objet![0].nombreVehicule ?? 0}",
+                        "${ctlDashboard.dashboardResume.value.nombreVehicule ?? 0}",
                   ),
                 ),
                 const SizedBox(width: 16.0),
@@ -147,7 +147,7 @@ class DashboardView extends GetView<DashboardController> {
                     icon: FontAwesomeIcons.car,
                     title: "Véhicules actifs",
                     data:
-                        "${ctlDashboard.dashboardResume.value.objet![0].nombreVehculeActif ?? 0}",
+                        "${ctlDashboard.dashboardResume.value.nombreVehculeActif ?? 0}",
                   ),
                 ),
               ],
@@ -294,7 +294,7 @@ class DashboardView extends GetView<DashboardController> {
                 style: TextStyle(fontSize: 13),
               ),
               subtitle: Text(
-                  "${ctlDashboard.dashboardResume.value.objet![0].courseJour ?? 0} Courses",
+                  "${ctlDashboard.dashboardResume.value.courseJour ?? 0} Courses",
                   style: const TextStyle(fontSize: 13)),
             ),
           ),
@@ -335,7 +335,7 @@ class DashboardView extends GetView<DashboardController> {
               ),
               title: const Text("Montant", style: TextStyle(fontSize: 13)),
               subtitle: Text(
-                "${ctlDashboard.dashboardResume.value.objet![0].montantJour ?? 0} Fcfa",
+                "${ctlDashboard.dashboardResume.value.montantJour ?? 0} Fcfa",
                 style: const TextStyle(fontSize: 13),
               ),
             ),

@@ -46,7 +46,7 @@ class _PeopleListPageState extends State<PeopleListPage> {
     if (_searchTerm.isNotEmpty) {
       _newList = await ctlRechargement.chercherContact(_searchTerm.trim());
     } else {
-      _newList = ctlDriver.driversList.value.objet!;
+      _newList = ctlDriver.driversList;
     }
     setState(() {
       if (showIndicator) {
