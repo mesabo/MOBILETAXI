@@ -6,6 +6,8 @@ import 'package:fredy_proprio/app/data/models/resume_model.dart' as resu;
 import 'package:fredy_proprio/app/data/models/vehicule_model.dart' as veh;
 import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart' as vr;
 import 'package:fredy_proprio/app/data/providers/providers.dart';
+import 'package:fredy_proprio/app/data/services/local_storage.dart';
+import 'package:fredy_proprio/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class DriverController extends GetxController {
@@ -53,7 +55,7 @@ class DriverController extends GetxController {
   final isready = false.obs;
 
   final RxBool isLoading = false.obs;
-  RxList<resu.Resume> historiqueDriverList = <resu.Resume>[].obs;
+  RxList<resu.Objet> historiqueDriverList = <resu.Objet>[].obs;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endedDate = DateTime.now().obs;
   RxString dateJour = DateTime.now().toString().substring(0, 10).obs;
@@ -103,6 +105,7 @@ class DriverController extends GetxController {
   Future<List<veh.Objet>> getVehiculeLibre() async {
     istLoading.value = true;
     var _res = await provDriver.getListerVehiculeLibre(
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id ?? 0);
     vehiculelibreList.value = _res.objet!;
     tempVehiculelibreList.value = vehiculelibreList.value;
@@ -115,6 +118,7 @@ class DriverController extends GetxController {
     String _jour = DateTime.now().toString().substring(0, 10);
     istLoading.value = true;
     result.Resultat _res = await provDriver.postDriver(
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
       proprio_id: helper.proprioInfo.value.id ?? 0,
       nom: nomTC.text.trim().toUpperCase(),
       prenom: prenomTC.text.trim().toUpperCase(),
@@ -137,6 +141,7 @@ class DriverController extends GetxController {
     istLoading.value = true;
     result.Resultat _res = await provDriver.putDriver(
       id: driver.value.id ?? 0,
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
       proprio_id: helper.proprioInfo.value.id ?? 0,
       nom: nomTC.text.trim().toUpperCase(),
       prenom: prenomTC.text.trim().toUpperCase(),
@@ -156,7 +161,10 @@ class DriverController extends GetxController {
   Future<result.Resultat> attribuerVehicule() async {
     istLoading.value = true;
     result.Resultat _res = await provDriver.putAttribuerVehicule(
-        vehicule_id: vehicleSelected.value.id ?? 0, driver_id: driverID.value);
+        vehicule_id: vehicleSelected.value.id ?? 0,
+        driver_id: driverID.value,
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
+        id_user: helper.proprioInfo.value.id ?? 0);
     ctlVehicule.listerVehicules();
     ctlDriver.ListerDrivers();
     istLoading.value = false;
@@ -167,7 +175,13 @@ class DriverController extends GetxController {
   Future ListerDrivers() async {
     istLoading.value = true;
     var _res = await provDriver.getListerDrivers(
-        proprio_id: helper.proprioInfo.value.id ?? 0);
+      proprio_id: helper.proprioInfo.value.id ?? 0,
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
+    );
+    if (_res.etatConnexion == false) {
+      LocalStorage().eraseUserData();
+      Get.offAllNamed(Routes.SIGNIN);
+    }
     driversList.value = _res.objet!;
     driversList.value = driversList.reversed.toList();
     tempDriverList.value = driversList.value;
@@ -176,14 +190,22 @@ class DriverController extends GetxController {
   }
 
   ///`LISTER HISTORIQUE`
-  Future<List<resu.Resume>> getHistorique() async {
+  Future<List<resu.Objet>> getHistorique() async {
     isLoading.value = true;
-    historiqueDriverList.value = await provDriver.getListerHistoriqueDrivers(
+    var _res = await provDriver.getListerHistoriqueDrivers(
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id!.toInt(),
         driver_id: driver.value.id!.toInt(),
         date_debut: startDate.value.toString().substring(0, 10),
         date_fin: endedDate.value.toString().substring(0, 10));
+
+    if (_res.etatConnexion == false) {
+      LocalStorage().eraseUserData();
+      Get.offAllNamed(Routes.SIGNIN);
+    }
+    historiqueDriverList.value = _res.objet ?? [];
     isLoading.value = false;
+
     return historiqueDriverList.value;
   }
 }

@@ -23,7 +23,11 @@ class DashboardView extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => _buildBody(context)),
+      body: Obx(() => RefreshIndicator(
+          onRefresh: () async {
+            await ctlDashboard.loadDashboardresume();
+          },
+          child: _buildBody(context))),
     );
   }
 
@@ -71,7 +75,10 @@ class DashboardView extends GetView<DashboardController> {
           InkWell(
             onTap: () async {
               proFlotte
-                  .getLienFlotte(proprio_id: helper.proprioInfo.value.id ?? 0)
+                  .getLienFlotte(
+                      proprio_id: helper.proprioInfo.value.id ?? 0,
+                      cle_connexion:
+                          helper.proprioInfo.value.cleConnexion ?? '')
                   .then((value) {
                 printInfo(info: "${value.lien}");
                 if (value.lien != null && value.lien!.isNotEmpty) {

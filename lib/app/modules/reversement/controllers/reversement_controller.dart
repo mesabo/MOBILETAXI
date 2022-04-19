@@ -22,7 +22,9 @@ class ReversementController extends GetxController {
   Future<String> genererLienPaiement(int proprioId, String montant) async {
     isLoading.value = true;
     Reversement _reversement = await provReversement.postGenererLienPaiement(
-        proprio_id: proprioId, montant: montant);
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
+        proprio_id: proprioId,
+        montant: montant);
     if (_reversement.bSuccess == true &&
         _reversement.versementUrl != null &&
         _reversement.versementUrl!.isNotEmpty) {

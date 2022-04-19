@@ -8,14 +8,14 @@ import 'decoder_retour.dart';
 
 class FinanceProvider {
   /// EXECUTER REQUETE GET
-  Future<Financeresume> getListerFinanceResumers({
-    required int proprio_id,
-    required String date_debut,
-    required String date_fin,
-  }) async {
+  Future<Financeresume> getListerFinanceResumers(
+      {required int proprio_id,
+      required String date_debut,
+      required String date_fin,
+      required String cle_connexion}) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_FINANCE_RESUME +
-        "proprio_id=$proprio_id&date_debut=$date_debut&date_fin=$date_fin";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&date_debut=$date_debut&date_fin=$date_fin";
     final response = await http.get(Uri.parse(url));
     return parsFinanceresume(response.body);
   }

@@ -83,7 +83,9 @@ class RechargementController extends GetxController {
   Future<Rechargement> listerHistoriqueRecharges() async {
     isOperationLoading.value = true;
     rechargements.value = await proRechargement.getListerHistoriqueRechargement(
-        proprio_id: helper.proprioInfo.value.id ?? 0);
+      proprio_id: helper.proprioInfo.value.id ?? 0,
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
+    );
     isOperationLoading.value = false;
     print(rechargements.value.toJson());
     return rechargements.value;
@@ -93,6 +95,7 @@ class RechargementController extends GetxController {
     isOperationLoading.value = true;
     var _res = proRechargement.getLienRechargement(
         proprio_id: helper.proprioInfo.value.id ?? 0,
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         driver_id: driver.value.objet![0].id ?? 0,
         driver_contact: driver.value.objet![0].telephone ?? '',
         montant: montant);

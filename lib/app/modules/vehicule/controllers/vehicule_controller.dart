@@ -3,8 +3,9 @@ import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/data/models/categorie_model.dart';
 import 'package:fredy_proprio/app/data/models/resultat_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_historique_course_model.dart';
-import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
-import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart';
+import 'package:fredy_proprio/app/data/models/vehicule_model.dart' as veh;
+import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart'
+    as veh_resu;
 import 'package:fredy_proprio/app/data/providers/providers.dart';
 import 'package:get/get.dart';
 
@@ -47,10 +48,10 @@ class VehiculeController extends GetxController {
   ];
 
   Rx<Categorie> categoriesList = Categorie().obs;
-  Rx<Vehicule> vehicule = Vehicule().obs;
-  Rx<VehiculeResume> vehiculeResume = VehiculeResume().obs;
-  Rx<Vehicule> vehiculesList = Vehicule().obs;
-  Rx<Vehicule> tempVehiculeList = Vehicule().obs;
+  RxList<veh.Objet> vehicule = <veh.Objet>[].obs;
+  RxList<veh_resu.Objet> vehiculeResume = <veh_resu.Objet>[].obs;
+  RxList<veh.Objet> vehiculesList = <veh.Objet>[].obs;
+  RxList<veh.Objet> tempVehiculeList = <veh.Objet>[].obs;
   RxList<VehiculeHistoriqueCourse> vehiculeHistoriqueList =
       <VehiculeHistoriqueCourse>[].obs;
 
@@ -85,7 +86,7 @@ class VehiculeController extends GetxController {
   }
 
   ///`RESUME VEHICULE`
-  Future<VehiculeResume> getVehiculeResume(vehicule_id) async {
+  Future<List<veh_resu.Objet>> getVehiculeResume(vehicule_id) async {
     String _jour = DateTime.now().toString().substring(0, 10);
     istLoading.value = true;
     var _res = await provVehicule.getVehiculeResume(
@@ -94,22 +95,23 @@ class VehiculeController extends GetxController {
         vehicule_id: vehicule_id ?? 0,
         date_jour: _jour);
     if (_res.objet!.isNotEmpty) {
-      vehiculeResume.value = _res;
+      vehiculeResume.value = _res.objet ?? [];
     }
     istLoading.value = false;
-    return vehiculeResume.value;
+    return vehiculeResume;
   }
 
   ///`LISTER VEHICULES`
 
-  Future<Vehicule> listerVehicules() async {
+  Future<List<veh.Objet>> listerVehicules() async {
     istLoading.value = true;
-    vehiculesList.value = await provVehicule.getListerVehicule(
+    var _res = await provVehicule.getListerVehicule(
         cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id ?? 0);
-    tempVehiculeList.value.objet = vehiculesList.value.objet!.reversed.toList();
+    vehiculesList.value = _res.objet ?? [];
+    tempVehiculeList.value = vehiculesList.reversed.toList();
     istLoading.value = false;
-    return vehiculesList.value;
+    return vehiculesList;
   }
 
   ///`LISTER HISTORIQUE D'UN VEHICULE`
@@ -154,7 +156,7 @@ class VehiculeController extends GetxController {
   Future<Resultat> updateVehicule() async {
     istLoading.value = true;
     Resultat _retour = await provVehicule.putVehicule(
-      id: vehicule.value.objet!.first.id!.toInt(),
+      id: vehicule.first.id!.toInt(),
       proprio_id: helper.proprioInfo.value.id!.toInt(),
       cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
       immatriculation: immatTC.text.trim().toUpperCase(),

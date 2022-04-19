@@ -1,20 +1,18 @@
-import 'dart:convert';
-
 import 'package:fredy_proprio/app/data/models/vehicule_historique_course_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_model.dart';
 import 'package:fredy_proprio/app/data/models/vehicule_resume_model.dart';
 import 'package:fredy_proprio/app/utils/app_urls.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/resultat_model.dart';
 import 'decoder_retour.dart';
 
 class VehiculeProvider {
   /// EXECUTER REQUETE GET
   Future<Vehicule> getListerVehicule(
       {required int proprio_id, required String cle_connexion}) async {
-    var url =
-        APPURL.BASE_URL + APPURL.GET_LISTER_VEHICULE + "proprio_id=$proprio_id";
+    var url = APPURL.BASE_URL +
+        APPURL.GET_LISTER_VEHICULE +
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion";
     final response = await http.get(Uri.parse(url));
 
     return parseVehicules(response.body);
@@ -29,7 +27,7 @@ class VehiculeProvider {
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_VEHICULE_RESUME +
-        "proprio_id=$proprio_id&vehicule_id=$vehicule_id&date_jour=$date_jour";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&vehicule_id=$vehicule_id&date_jour=$date_jour";
     final response = await http.get(Uri.parse(url));
     return parseVehiculeresume(response.body);
   }
@@ -44,7 +42,7 @@ class VehiculeProvider {
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_VEHICULE_HISTORIQUE_COURSE +
-        "proprio_id=$proprio_id&date_debut=$date_debut&date_fin=$date_fin&vehicule_id=$vehicule_id";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&date_debut=$date_debut&date_fin=$date_fin&vehicule_id=$vehicule_id";
     final response = await http.get(Uri.parse(url));
     return parseResultatLVHC(response.body);
   }
@@ -67,7 +65,7 @@ class VehiculeProvider {
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.PUT_VEHICULE +
-        "id=$id&proprio_id=$proprio_id&id=$id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&statut=$statut&categorie_id=$categorie_id&numero_assurance=$nvignette&numero_vignette=$nassurance&numero_carte_transport=$ncartetransp";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&id=$id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&statut=$statut&categorie_id=$categorie_id&numero_assurance=$nvignette&numero_vignette=$nassurance&numero_carte_transport=$ncartetransp";
 
     final response = await http.put(Uri.parse(url));
     return parseResultat(response.body);
@@ -89,7 +87,7 @@ class VehiculeProvider {
   }) async {
     var url = APPURL.BASE_URL +
         APPURL.POST_VEHICULE +
-        "proprio_id=$proprio_id&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&categorie_id=$categorie_id&numero_assurance=$nvignette&numero_vignette=$nassurance&numero_carte_transport=$ncartetransp";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&immatriculation=$immatriculation&marque=$marque&modele=$modele&couleur=$couleur&annee=$annee&categorie_id=$categorie_id&numero_assurance=$nvignette&numero_vignette=$nassurance&numero_carte_transport=$ncartetransp";
 
     final response = await http.post(Uri.parse(url));
     return parseResultat(response.body);

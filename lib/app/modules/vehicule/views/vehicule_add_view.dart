@@ -296,7 +296,7 @@ class VehiculeAddView extends GetView {
           readOnly: true,
           decoration: InputDecoration(
               labelText: "Année",
-              hintText: ctlVehicule.vehicule.value.objet!.first.annee ?? "",
+              hintText: ctlVehicule.vehicule.first.annee ?? "",
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.normal,
               ),

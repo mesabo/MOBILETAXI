@@ -27,6 +27,7 @@ class DashboardController extends GetxController {
   Future loadDashboardresume() async {
     isLoading.value = true;
     var _res = await provDashboard.getListerDashboardResumers(
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id ?? 0,
         date_jour: helper.startdate.value);
     if (_res.objet != null && _res.objet!.isNotEmpty) {

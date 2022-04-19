@@ -20,82 +20,87 @@ class DriverView extends GetView<DriverController> {
       DeviceOrientation.portraitDown,
     ]);
     return Obx(() => Material(
-          child: SafeArea(
-              child: CupertinoPageScaffold(
-            child: CustomScrollView(
-              slivers: [
-                // The CupertinoSliverNavigationBar
-                CupertinoSliverNavigationBar(
-                  // backgroundColor: AppBarTheme.of(context).backgroundColor,
-                  leading: Row(
-                    children: [
-                      const Text(
-                        'Total: ',
-                      ),
-                      Text(
-                        '${ctlDriver.tempDriverList.length}',
-                        style: const TextStyle(
-                            // color: Colors.blue,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: AppColor.PBLUE),
-                      ),
-                    ],
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await ctlDriver.ListerDrivers();
+            },
+            child: SafeArea(
+                child: CupertinoPageScaffold(
+              child: CustomScrollView(
+                slivers: [
+                  // The CupertinoSliverNavigationBar
+                  CupertinoSliverNavigationBar(
+                    // backgroundColor: AppBarTheme.of(context).backgroundColor,
+                    leading: Row(
+                      children: [
+                        const Text(
+                          'Total: ',
+                        ),
+                        Text(
+                          '${ctlDriver.tempDriverList.length}',
+                          style: const TextStyle(
+                              // color: Colors.blue,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.PBLUE),
+                        ),
+                      ],
+                    ),
+                    // middle: const Text("Gestion Chauffeurs"),
+                    trailing: IconButton(
+                      icon: const Icon(CupertinoIcons.add_circled_solid),
+                      onPressed: () {
+                        // ctlDriver.ListerDrivers();
+                        ctlDriver.isEditing.value = false;
+                        Get.to(() => DriverAddView());
+                      },
+                    ),
+                    largeTitle: CupertinoSearchTextField(
+                      controller: ctlDriver.searchTextTC,
+                      placeholder: 'Chercher ....',
+                      onTap: () {
+                        ctlDriver.tempDriverList.value =
+                            ctlDriver.driversList.value;
+                      },
+                      onChanged: (value) {
+                        ctlDriver.tempDriverList.value = ctlDriver.driversList
+                            .where((p0) =>
+                                p0.nom!
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()) ||
+                                p0.prenom!
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()) ||
+                                p0.telephone!
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()))
+                            .toList();
+                      },
+                      onSuffixTap: () {
+                        ctlDriver.searchTextTC.text = "";
+                        ctlDriver.tempDriverList.value =
+                            ctlDriver.driversList.value;
+                      },
+                    ),
                   ),
-                  // middle: const Text("Gestion Chauffeurs"),
-                  trailing: IconButton(
-                    icon: const Icon(CupertinoIcons.add_circled_solid),
-                    onPressed: () {
-                      // ctlDriver.ListerDrivers();
-                      ctlDriver.isEditing.value = false;
-                      Get.to(() => DriverAddView());
-                    },
-                  ),
-                  largeTitle: CupertinoSearchTextField(
-                    controller: ctlDriver.searchTextTC,
-                    placeholder: 'Chercher ....',
-                    onTap: () {
-                      ctlDriver.tempDriverList.value =
-                          ctlDriver.driversList.value;
-                    },
-                    onChanged: (value) {
-                      ctlDriver.tempDriverList.value = ctlDriver.driversList
-                          .where((p0) =>
-                              p0.nom!
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()) ||
-                              p0.prenom!
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()) ||
-                              p0.telephone!
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()))
-                          .toList();
-                    },
-                    onSuffixTap: () {
-                      ctlDriver.searchTextTC.text = "";
-                      ctlDriver.tempDriverList.value =
-                          ctlDriver.driversList.value;
-                    },
-                  ),
-                ),
 
-                // Other sliver elements
-                SliverList(
-                    // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    //   maxCrossAxisExtent: 200.0,
-                    //   mainAxisSpacing: 10.0,
-                    //   crossAxisSpacing: 10.0,
-                    //   childAspectRatio: 3 / 2,
-                    // ),
-                    delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) =>
-                      DriverItemsView(driver: ctlDriver.tempDriverList[index]),
-                  childCount: ctlDriver.tempDriverList.length,
-                )),
-              ],
-            ),
-          )),
+                  // Other sliver elements
+                  SliverList(
+                      // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      //   maxCrossAxisExtent: 200.0,
+                      //   mainAxisSpacing: 10.0,
+                      //   crossAxisSpacing: 10.0,
+                      //   childAspectRatio: 3 / 2,
+                      // ),
+                      delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) => DriverItemsView(
+                        driver: ctlDriver.tempDriverList[index]),
+                    childCount: ctlDriver.tempDriverList.length,
+                  )),
+                ],
+              ),
+            )),
+          ),
         ));
   }
 

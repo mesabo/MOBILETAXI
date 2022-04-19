@@ -32,11 +32,7 @@ List<VehiculeHistoriqueCourse> parseResultatLVHC(responseBody) {
 }
 
 VehiculeResume parseVehiculeresume(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed
-      .map<VehiculeResume>((json) => VehiculeResume.fromJson(json))
-      .toList();
+  return VehiculeResume.fromJson(json.decode(responseBody));
 }
 
 /// DECODER LES DONNEES
@@ -69,10 +65,8 @@ Driver parseDrivers(responseBody) {
 }
 
 /// DECODER LES DONNEES
-List<Resume> parseHistoriqueDrivers(responseBody) {
-  final parsed =
-      json.decode(responseBody)["objet"].cast<Map<String, dynamic>>();
-  return parsed.map<ObjetMessage>((json) => Resume.fromJson(json)).toList();
+Resume parseHistoriqueDrivers(responseBody) {
+  return Resume.fromJson(json.decode(responseBody));
 }
 
 /// DECODER LES DONNEES

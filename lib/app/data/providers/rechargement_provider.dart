@@ -8,12 +8,13 @@ class RechargementProvider {
   /// DEMANDER UN LIEN DE RECHARGEMENT
   Future<Paiement> getLienRechargement(
       {required int proprio_id,
+      required String cle_connexion,
       required int driver_id,
       required String driver_contact,
       required int montant}) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_LIEN_RECHARGE +
-        "proprio_id=$proprio_id&driver_id=$driver_id&driver_contact=$driver_contact&montant=$montant";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&driver_id=$driver_id&driver_contact=$driver_contact&montant=$montant";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       return Paiement.fromJson(json.decode(response.body));
@@ -24,10 +25,10 @@ class RechargementProvider {
 
   /// LISTER LES 100 DERNIERS  RECHARGEMENTS
   Future<Rechargement> getListerHistoriqueRechargement(
-      {required int proprio_id}) async {
+      {required int proprio_id, required String cle_connexion}) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_LISTER_HISTORIQUE_RECHARGE +
-        "proprio_id=$proprio_id";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion";
     final response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200) {

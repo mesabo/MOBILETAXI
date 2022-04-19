@@ -30,7 +30,7 @@ class VehiculeView extends GetView<VehiculeController> {
                               fontWeight: FontWeight.w100),
                         ),
                         Text(
-                          '${ctlVehicule.tempVehiculeList.value.objet!.length}',
+                          '${ctlVehicule.tempVehiculeList.length}',
                           style: const TextStyle(
                               color: Colors.green,
                               fontSize: 22,
@@ -57,8 +57,8 @@ class VehiculeView extends GetView<VehiculeController> {
                           ctlVehicule.vehiculesList.value;
                     },
                     onChanged: (value) {
-                      ctlVehicule.tempVehiculeList.value.objet = ctlVehicule
-                          .vehiculesList.value.objet!
+                      ctlVehicule.tempVehiculeList.value = ctlVehicule
+                          .vehiculesList
                           .where((p0) =>
                               p0.immatriculation!
                                   .toLowerCase()
@@ -88,9 +88,9 @@ class VehiculeView extends GetView<VehiculeController> {
                 // Other sliver elements
                 SliverList(
                     delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) => VehiculeItemsView(
-                      ctlVehicule.tempVehiculeList.value.objet![index]),
-                  childCount: ctlVehicule.tempVehiculeList.value.objet!.length,
+                  (BuildContext context, int index) =>
+                      VehiculeItemsView(ctlVehicule.tempVehiculeList[index]),
+                  childCount: ctlVehicule.tempVehiculeList.length,
                 )),
               ],
             ),

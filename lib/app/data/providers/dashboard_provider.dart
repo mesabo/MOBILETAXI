@@ -8,21 +8,27 @@ import 'decoder_retour.dart';
 
 class DashboardProvider {
   /// EXECUTER REQUETE GET
-  Future<DashboardResumer> getListerDashboardResumers(
-      {required int proprio_id, required String date_jour}) async {
+  Future<DashboardResumer> getListerDashboardResumers({
+    required int proprio_id,
+    required String cle_connexion,
+    required String date_jour,
+  }) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_DASHBOARD_RESUME +
-        "proprio_id=$proprio_id&date_jour=$date_jour";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&date_jour=$date_jour";
     final response = await http.get(Uri.parse(url));
     return parseDashboardResumer(response.body);
   }
 
   /// EXECUTER REQUETE GET
-  Future<Financeresume> getRapportJournee(
-      {required int proprio_id, required String date_jour}) async {
+  Future<Financeresume> getRapportJournee({
+    required int proprio_id,
+    required String cle_connexion,
+    required String date_jour,
+  }) async {
     var url = APPURL.BASE_URL +
         APPURL.GET_RAPPORT_JOURNEE +
-        "proprio_id=$proprio_id&date_jour=$date_jour";
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion&date_jour=$date_jour";
     final response = await http.get(Uri.parse(url));
     return parsFinanceresume(response.body);
   }

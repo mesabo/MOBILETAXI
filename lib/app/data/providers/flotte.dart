@@ -5,9 +5,11 @@ import 'dart:convert';
 
 class FlotteProvider {
   /// DEMANDER UN LIEN DE RECHARGEMENT
-  Future<Paiement> getLienFlotte({required int proprio_id}) async {
-    var url =
-        APPURL.BASE_URL + APPURL.GET_LIEN_FLOTTE + "proprio_id=$proprio_id";
+  Future<Paiement> getLienFlotte(
+      {required int proprio_id, required String cle_connexion}) async {
+    var url = APPURL.BASE_URL +
+        APPURL.GET_LIEN_FLOTTE +
+        "proprio_id=$proprio_id&id_user=$proprio_id&cle_connexion=$cle_connexion";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var _res = parseReversement(response.body);

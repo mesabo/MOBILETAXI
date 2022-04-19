@@ -62,7 +62,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                   trailing: IconButton(
                       onPressed: () {
                         Get.back();
-                        ctlVehicule.vehicule.value.objet!.first = vehicule;
+                        ctlVehicule.vehicule.first = vehicule;
                         ctlVehicule.vehiculeDate.value =
                             DateTime.tryParse(vehicule.annee.toString()) ??
                                 DateTime.now();
@@ -104,7 +104,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                             ),
                             const SizedBox(width: 5.0),
                             Text(
-                                "${ctlVehicule.vehiculeResume.value.objet!.first.distanceJour ?? 0} km"),
+                                "${ctlVehicule.vehiculeResume.first.distanceJour ?? 0} km"),
                             Spacer(),
                             Container(
                                 height: 20.0, width: 1.0, color: Colors.grey),
@@ -115,7 +115,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                             ),
                             const SizedBox(width: 5.0),
                             Text(
-                                "${ctlVehicule.vehiculeResume.value.objet!.first.montantJour ?? 0} F"),
+                                "${ctlVehicule.vehiculeResume.first.montantJour ?? 0} F"),
                           ],
                         ),
                       ),
@@ -127,11 +127,10 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(children: [
-                            (ctlVehicule.vehiculeResume.value.objet!.first
-                                            .driverNom !=
+                            (ctlVehicule.vehiculeResume.first.driverNom !=
                                         null ||
-                                    ctlVehicule.vehiculeResume.value.objet!
-                                            .first.driverPrenom !=
+                                    ctlVehicule.vehiculeResume.first
+                                            .driverPrenom !=
                                         null)
                                 ? Column(
                                     crossAxisAlignment:
@@ -139,14 +138,12 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                                     children: <Widget>[
                                       Text("Chauffeur"),
                                       Text(
-                                          "${ctlVehicule.vehiculeResume.value.objet!.first.driverNom} ${ctlVehicule.vehiculeResume.value.objet!.first.driverPrenom}"),
+                                          "${ctlVehicule.vehiculeResume.first.driverNom} ${ctlVehicule.vehiculeResume.first.driverPrenom}"),
                                     ],
                                   )
                                 : const SizedBox(),
                             const Spacer(),
-                            ctlVehicule.vehiculeResume.value.objet!.first
-                                        .driverNom !=
-                                    null
+                            ctlVehicule.vehiculeResume.first.driverNom != null
                                 ? Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -154,7 +151,7 @@ class VehiculeDetailNestedScrollModal extends StatelessWidget {
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: <Widget>[
                                       Text(
-                                          "${ctlVehicule.vehiculeResume.value.objet!.first.driverTelephone}"),
+                                          "${ctlVehicule.vehiculeResume.first.driverTelephone}"),
                                     ],
                                   )
                                 : const SizedBox(),

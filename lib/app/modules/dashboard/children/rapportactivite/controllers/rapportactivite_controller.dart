@@ -35,6 +35,7 @@ class RapportactiviteController extends GetxController {
     isLoading.value = true;
     rapportJournee.value = await provDashboard.getRapportJournee(
         proprio_id: helper.proprioInfo.value.id!.toInt(),
+        cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         date_jour: dateJour.value);
     isLoading.value = false;
     return rapportJournee.value;

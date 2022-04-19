@@ -31,21 +31,23 @@ class SigninController extends GetxController {
         telephone: phoneTC.text.toString().substring(1, phoneTC.text.length),
         password: passwordTC.text.trim().toLowerCase());
     isLoading.value = false;
+    if (_signin.bSuccess == true) {
+      if (_signin.objet![0].id! > 0) {
+        Get.snackbar("Merci", "Connexion établie avec succès !");
 
-    if (_signin.objet![0].id! > 0) {
-      Get.snackbar("Merci", "Connexion établie avec succès !");
+        await LocalStorage().saveUserData(_signin.objet![0]);
+        helper.authenticateUser();
 
-      await LocalStorage().saveUserData(_signin.objet![0]);
-      helper.authenticateUser();
-
-      phoneTC.text = "";
-      passwordTC.text = "";
-      ctlHome.currentPage.value = 0;
-      ctlDashboard.loadDashboardresume();
-      Get.offAllNamed(Routes.HOME);
-    } else {
-      Get.snackbar("Erreur connexion", "Téléphone ou mot de pass incorrects !",
-          duration: const Duration(milliseconds: 4000));
+        phoneTC.text = "";
+        passwordTC.text = "";
+        ctlHome.currentPage.value = 0;
+        ctlDashboard.loadDashboardresume();
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        Get.snackbar(
+            "Erreur connexion", "Téléphone ou mot de pass incorrects !",
+            duration: const Duration(milliseconds: 4000));
+      }
     }
   }
 }

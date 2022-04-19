@@ -168,15 +168,13 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(ctlVehicule
-                                                .vehiculesList.value.objet!
+                                        Text(ctlVehicule.vehiculesList
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
                                                 .immatriculation ??
                                             'IMMATRICULATION'),
-                                        Text(ctlVehicule
-                                                .vehiculesList.value.objet!
+                                        Text(ctlVehicule.vehiculesList
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
@@ -191,15 +189,13 @@ class driverDetailNestedScrollModal extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       // ignore: prefer_const_literals_to_create_immutables
                                       children: <Widget>[
-                                        Text(ctlVehicule
-                                                .vehiculesList.value.objet!
+                                        Text(ctlVehicule.vehiculesList
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)
                                                 .modele ??
                                             "MODELE"),
-                                        Text(ctlVehicule
-                                                .vehiculesList.value.objet!
+                                        Text(ctlVehicule.vehiculesList
                                                 .firstWhere((element) =>
                                                     element.id ==
                                                     driver.vehiculeId)

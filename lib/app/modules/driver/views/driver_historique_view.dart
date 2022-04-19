@@ -55,8 +55,8 @@ class DriverHistoriqueView extends GetView {
                     enableMultiSelection: true,
                     enableSideBySideSeriesPlacement: false,
                     tooltipBehavior: ctlDriver.tooltipBehavior,
-                    series: <ChartSeries<Resume, DateTime>>[
-                      ColumnSeries<Resume, DateTime>(
+                    series: <ChartSeries<Objet, DateTime>>[
+                      ColumnSeries<Objet, DateTime>(
                         animationDuration: 2000,
                         onRendererCreated: (ChartSeriesController controller) {
                           _chartSeriesController1 = controller;
@@ -68,15 +68,15 @@ class DriverHistoriqueView extends GetView {
                                     .take(15)
                                     .toList()
                                 : ctlDriver.historiqueDriverList,
-                        xValueMapper: (Resume sales, _) =>
-                            DateTime.parse(sales.objet![0].date.toString()),
-                        yValueMapper: (Resume sales, _) =>
-                            int.parse(sales.objet![0].montant.toString()),
+                        xValueMapper: (Objet sales, _) =>
+                            DateTime.parse(sales.date.toString()),
+                        yValueMapper: (Objet sales, _) =>
+                            int.parse(sales.montant.toString()),
                         enableTooltip: true,
                         name: 'montant',
                         yAxisName: 'Montants',
                       ),
-                      LineSeries<Resume, DateTime>(
+                      LineSeries<Objet, DateTime>(
                         animationDuration: 2000,
                         onRendererCreated: (ChartSeriesController controller) {
                           _chartSeriesController2 = controller;
@@ -89,10 +89,10 @@ class DriverHistoriqueView extends GetView {
                         dataSource: ctlDriver.historiqueDriverList.length > 12
                             ? ctlDriver.historiqueDriverList.take(12).toList()
                             : ctlDriver.historiqueDriverList,
-                        xValueMapper: (Resume sales, _) =>
-                            DateTime.parse(sales.objet![0].date.toString()),
-                        yValueMapper: (Resume sales, _) =>
-                            int.parse(sales.objet![0].duree.toString()),
+                        xValueMapper: (Objet sales, _) =>
+                            DateTime.parse(sales.date.toString()),
+                        yValueMapper: (Objet sales, _) =>
+                            int.parse(sales.duree.toString()),
                         name: 'duree',
                       ),
                     ],

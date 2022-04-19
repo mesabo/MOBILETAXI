@@ -39,6 +39,7 @@ class FinanceController extends GetxController {
     isLoading.value = true;
     financeResume.value = await provFinance.getListerFinanceResumers(
       proprio_id: helper.proprioInfo.value.id ?? 0,
+      cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
       date_debut: startDate.value.toString().substring(0, 10),
       date_fin: endedDate.value.toString().substring(0, 10),
     );
