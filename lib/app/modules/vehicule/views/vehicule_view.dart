@@ -54,7 +54,7 @@ class VehiculeView extends GetView<VehiculeController> {
                     placeholder: 'Chercher ....',
                     onTap: () {
                       ctlVehicule.tempVehiculeList.value =
-                          ctlVehicule.vehiculesList.value;
+                          ctlVehicule.vehiculesList;
                     },
                     onChanged: (value) {
                       ctlVehicule.tempVehiculeList.value = ctlVehicule
@@ -89,7 +89,7 @@ class VehiculeView extends GetView<VehiculeController> {
                 SliverList(
                     delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) =>
-                      VehiculeItemsView(ctlVehicule.tempVehiculeList[index]),
+                      VehiculeItemsView(ctlVehicule.tempVehiculeList[0]),
                   childCount: ctlVehicule.tempVehiculeList.length,
                 )),
               ],

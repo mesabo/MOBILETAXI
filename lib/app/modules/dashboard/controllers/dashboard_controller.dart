@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/data/models/dashboard_resumer_model.dart';
 import 'package:fredy_proprio/app/data/providers/providers.dart';
+import 'package:fredy_proprio/app/data/services/local_storage.dart';
+import 'package:fredy_proprio/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
@@ -30,6 +32,11 @@ class DashboardController extends GetxController {
         cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id ?? 0,
         date_jour: helper.startdate.value);
+
+    // if (_res.etatConnexion == false) {
+    //   LocalStorage().eraseUserData();
+    //   Get.offAllNamed(Routes.SIGNIN);
+    // }
     if (_res.objet != null && _res.objet!.isNotEmpty) {
       dashboardResume.value = _res.objet!.first;
     } else {

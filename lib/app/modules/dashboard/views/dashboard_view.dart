@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fredy_proprio/app/constants/controllers.dart';
 import 'package:fredy_proprio/app/data/providers/providers.dart';
+import 'package:fredy_proprio/app/data/services/local_storage.dart';
 import 'package:fredy_proprio/app/modules/dashboard/children/rapportactivite/views/rapportactivite_view.dart';
 import 'package:fredy_proprio/app/modules/flotter/maflotte.dart';
 import 'package:fredy_proprio/app/modules/rechargement/views/payment_web_view.dart';
@@ -79,10 +80,15 @@ class DashboardView extends GetView<DashboardController> {
                       proprio_id: helper.proprioInfo.value.id ?? 0,
                       cle_connexion:
                           helper.proprioInfo.value.cleConnexion ?? '')
-                  .then((value) {
-                printInfo(info: "${value.lien}");
-                if (value.lien != null && value.lien!.isNotEmpty) {
-                  Get.to(() => FlottePage(url: value.lien ?? "www.google.ci"));
+                  .then((flotte) {
+                if (flotte.etatConnexion == false) {
+                  LocalStorage().eraseUserData();
+                  Get.offAllNamed(Routes.SIGNIN);
+                }
+
+                if (flotte.etatConnexion == true && flotte.objet!.isNotEmpty) {
+                  Get.to(() => FlottePage(
+                      url: flotte.objet![0].lien ?? "www.google.ci"));
                 } else {
                   Get.snackbar("Merci", "Page web non disponible actuellement",
                       colorText: AppColor.PWHITE0,

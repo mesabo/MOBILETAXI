@@ -98,19 +98,21 @@ class DriverController extends GetxController {
     }
     istLoading.value = false;
     printInfo(info: vehiculeResume.value.toString());
+
     return vehiculeResume.value;
   }
 
   ///`VEHICULES LIBRES`
   Future<List<veh.Objet>> getVehiculeLibre() async {
     istLoading.value = true;
+
     var _res = await provDriver.getListerVehiculeLibre(
         cle_connexion: helper.proprioInfo.value.cleConnexion ?? '',
         proprio_id: helper.proprioInfo.value.id ?? 0);
     vehiculelibreList.value = _res.objet!;
-    tempVehiculelibreList.value = vehiculelibreList.value;
+    tempVehiculelibreList.value = vehiculelibreList;
     istLoading.value = false;
-    return vehiculelibreList.value;
+    return vehiculelibreList;
   }
 
   ///`AJOUTER VEHICULE`

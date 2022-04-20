@@ -7,7 +7,7 @@ import 'package:fredy_proprio/app/utils/app_styles.dart';
 
 import 'package:get/get.dart';
 
-import 'driver_detail_modal_with_nested_scroll copy.dart';
+import 'driver_detail_modal_with_nested_scroll.dart';
 
 class VehiculeItemsView extends GetView {
   final Objet vehicule;
@@ -81,8 +81,7 @@ class VehiculeItemsView extends GetView {
   Future<void> showMoreAboutVehicule(BuildContext context, Objet vehicule) {
     return showCupertinoModalPopup<void>(
         context: context,
-        builder: (BuildContext context) => VehiculeDetailNestedScrollModal(
-              vehicule: vehicule,
-            ));
+        builder: (BuildContext context) =>
+            VehiculeDetailNestedScrollModal(vehicule: vehicule));
   }
 }

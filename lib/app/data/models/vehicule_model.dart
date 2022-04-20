@@ -47,7 +47,7 @@ class Objet {
   int? gpsLatitude;
   String? createdAt;
   int? statut;
-  int? etat;
+  int? etatVehicule;
 
   Objet(
       {this.id,
@@ -66,7 +66,7 @@ class Objet {
       this.gpsLatitude,
       this.createdAt,
       this.statut,
-      this.etat});
+      this.etatVehicule});
 
   Objet.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -85,7 +85,7 @@ class Objet {
     gpsLatitude = json['gps_latitude'];
     createdAt = json['created_at'];
     statut = json['statut'];
-    etat = json['etat'];
+    etatVehicule = json['etat_vehicule'];
   }
 
   Map<String, dynamic> toJson() {
@@ -106,7 +106,7 @@ class Objet {
     data['gps_latitude'] = gpsLatitude;
     data['created_at'] = createdAt;
     data['statut'] = statut;
-    data['etat'] = etat;
+    data['etat_vehicule'] = etatVehicule;
     return data;
   }
 }

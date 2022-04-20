@@ -48,7 +48,7 @@ class Financeresume {
 
 class Objet {
   int? duree;
-  double? distance;
+  var distance;
   String? montant;
   String? date;
   String? espece;

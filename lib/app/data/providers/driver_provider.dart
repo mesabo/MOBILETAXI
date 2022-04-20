@@ -46,12 +46,11 @@ class DriverProvider {
   }
 
   /// EXECUTER REQUETE PUT
-  Future<Resultat> putAttribuerVehicule({
-    required int id_user,
-    required int vehicule_id,
-    required int driver_id,
-    required String cle_connexion,
-  }) async {
+  Future<Resultat> putAttribuerVehicule(
+      {required int id_user,
+      required int vehicule_id,
+      required int driver_id,
+      required String cle_connexion}) async {
     var url = APPURL.BASE_URL +
         APPURL.PUT_ATTRIBUER_VEHICULE +
         "chauffeur_id=$driver_id&vehicule_id=$vehicule_id&id_user=$id_user&cle_connexion=$cle_connexion";

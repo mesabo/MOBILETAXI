@@ -1,0 +1,10 @@
+{
+    "bSuccess": true,
+    "message": "succes",
+    "etat_connexion": true,
+    "objet": [
+        {
+            "lien": "http://160.238.36.155:8002/flotteProprio_maps/1"
+        }
+    ]
+}
